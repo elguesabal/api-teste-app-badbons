@@ -15,6 +15,10 @@ app.post("/login", (req, res) => {
 	} else {
 		res.status(401).send({ message: "Credenciais inválidas!" });
 	}
-})
+});
+
+app.post("/register", (req, res) => {
+	res.sendStatus(200);
+});
 
 app.listen(process.env.PORT || 3000, () => console.log("Servidor rodando"));
