@@ -21,4 +21,8 @@ app.post("/register", (req, res) => {
 	res.sendStatus(200);
 });
 
+app.get("/training-locations", (req, res) => {
+	res.status(200).json([ "Barra da Tijuca", "Andaraí", "Madureira", "Bonsucesso", "Tijuca", "Guaratiba", "Lagoa", "Taquara"]);
+});
+
 app.listen(process.env.PORT || 3000, () => console.log("Servidor rodando"));
