@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/ping", (req, res) => {
-	res.sendStatus(200);
+	res.status(200).send({ versions: ["1.0.0", "1.0.1", "1.0.2"] });
 });
 
 app.post("/login", (req, res) => {
