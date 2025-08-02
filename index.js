@@ -3,24 +3,29 @@ const app = express();
 
 app.use(express.json());
 
+/**
+ * @author VAMPETA
+ * @brief ROTA PING
+ * @returns {object} 200 - REPONDE COM UM ARRAY DE VERSOES DO APP COMPATIVEIS COM A API
+*/
 app.get("/ping", (req, res) => {
 	res.status(200).send({ versions: ["1.0.0", "1.0.1", "1.0.2"] });
 });
 
-app.post("/login", (req, res) => {
-	const { login, password } = req.body;
-
-	if (login === "Vampeta" && password === "123") {
-		res.status(200).send({ message: "Login bem-sucedido!" });
-	} else {
-		res.status(401).send({ message: "Credenciais inválidas!" });
-	}
-});
-
+/**
+ * @author VAMPETA
+ * @brief ROTA PARA CONSULTAR OS LOCAIS DE TREINO DISPONIVEIS
+ * @returns {array} 200 - RESPONDE COM ARRAY DE UNIDADES DISPONIVEIS
+*/
 app.get("/training-locations", (req, res) => {
 	res.status(200).json(["Barra da Tijuca", "Andaraí", "Madureira", "Bonsucesso", "Tijuca", "Guaratiba", "Lagoa", "Taquara"]);
 });
 
+/**
+ * @author VAMPETA
+ * @brief ROTA PARA CONSULTAR HORARIOS DISPONIVEIS
+ * @returns {object} 200 - RESPONDE COM ARRAY DE HORARIOS DISPONIVEIS PARA CADA UNIDADE SELECIONADA
+*/
 app.get("/timetable-units", (req, res) => {
 	const units = req.query["units[]"];
 	const data = [];
@@ -37,10 +42,48 @@ app.get("/timetable-units", (req, res) => {
 	res.status(200).json(data);
 });
 
+/**
+ * @author VAMPETA
+ * @brief ROTA DE REGISTRO
+ * @returns {object} 200 - RESPONDE APENAS COM STATUS 200 PARA INFORMAR QUE FOI FEITO O CADASTRO (O TOKEN E ENVIADO NO MOMENTO DO LOGIN)
+*/
 app.post("/register", (req, res) => {
 	setTimeout(() => {
 		res.sendStatus(200);
 	}, 1000);
+});
+
+/**
+ * @author VAMPETA
+ * @brief ROTA DE LOGIN
+ * @returns {object} 200 - ENVIA O TOKEN DO USUARIO QUE ELE VAI USAR EM REQUISICOES FUTURAS
+ * @returns {object} 401 - MENSAGEM DE ERRO AO TENTAR LOGAR COM LOGIN OU SENHA ERRADA
+*/
+app.post("/login", (req, res) => {
+	const { login, password } = req.body;
+
+	if (login === "Vampeta" && password === "123") {
+		res.status(200).send({ token: "12345" });
+	} else {
+		res.status(401).send({ message: "Credenciais inválidas!" });
+	}
+});
+
+/**
+ * @author VAMPETA
+ * @brief ROTA QUE LOGA USAND O TOKEN
+ * @returns {object} 200 - RESPONDE APENAS COM STATUS 200 PARA INFORMAR QUE O TOKEN AINDA E VALIDO
+ * @returns {object} 401 - RESPONDE APENAS COM STATUS 200 PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
+ * @warning NO FUTURO ESSA ROTA DEVE RETORNAR INFORMACOES DO USUARIO (OU NAO VAMOS VER NO DESENVOLVER DO APP)
+*/
+app.post("/login-token", (req, res) => {
+	const { token } = req.body;
+
+	if (token === "12345") {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(401);
+	}
 });
 
 app.listen(process.env.PORT || 3000, () => console.log("Servidor rodando"));
