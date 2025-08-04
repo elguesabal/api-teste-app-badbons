@@ -69,7 +69,7 @@ export function loginCredentials(req, res) {
 			cpf: "Cancelado",
 			date: "07/12/1989",
 			phone: "(00) 00000-0000",
-			// units: [""],
+			units: ["Shibuya", "Shinjuku", "Fukutoshin"],
 			// times: [""]
 		});
 	} else {
