@@ -70,7 +70,10 @@ export function loginCredentials(req, res) {
 			date: "07/12/1989",
 			phone: "(00) 00000-0000",
 			units: ["Shibuya", "Shinjuku", "Fukutoshin"],
-			// times: [""]
+			times: {
+				Madureira: [ { day: "Quinta", start: "18:00", end: "19:30" }, { day: "Sabado", start: "9:00", end: "10:30" } ],
+				Bonsucesso: [ { day: "Quarta", start: "18:00", end: "20:00" } ]
+			}
 		});
 	} else {
 		res.status(401).send({ message: "Credenciais inválidas!" });
