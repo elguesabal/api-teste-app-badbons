@@ -11,4 +11,7 @@ app.post("/register", register);
 app.post("/login", loginCredentials);
 app.post("/login-token", loginToken);
 
+import { gameHistory } from "./sections/profile.js";
+app.get("/game-history", gameHistory);
+
 app.listen(process.env.PORT || 3000, () => console.log("Servidor rodando"));
