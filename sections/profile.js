@@ -54,7 +54,8 @@ const events = [
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function gameHistory(req, res) {
-	const { token } = req.body;
+	const authHeader = req.headers["authorization"];
+	const token = authHeader.split(" ")[1];
 
 	if (token === "12345") {
 		res.status(200).json(events);
