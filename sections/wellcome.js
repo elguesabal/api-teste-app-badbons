@@ -76,7 +76,7 @@ export function loginCredentials(req, res) {
 			}
 		});
 	} else {
-		res.status(401).send({ message: "Credenciais inválidas!" });
+		res.sendStatus(401);
 	}
 }
 
