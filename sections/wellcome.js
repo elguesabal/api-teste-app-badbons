@@ -5,7 +5,9 @@
  * @returns {object} 200 - REPONDE COM UM ARRAY DE VERSOES DO APP COMPATIVEIS COM A API
 */
 export function ping(req, res) {
-	res.status(200).send({ versions: ["1.0.0", "1.0.1", "1.0.2"] });
+	const version = req.query.version;
+
+	res.sendStatus((["1.0.0", "1.0.1", "1.0.2"].includes(version)) ? 200 : 426);
 }
 
 /**
