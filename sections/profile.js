@@ -49,7 +49,7 @@ const events = [
 /**
  * @author VAMPETA
  * @brief ROTA QUE RETORNA OS DADOS DO CLIENTE
- * @route /credentials
+ * @route /game-history
  * @returns {object} 200 - REPONDE COM O HISTORICO DE PARTIDAS DO USUARIO
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
