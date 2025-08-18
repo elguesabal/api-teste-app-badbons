@@ -15,10 +15,10 @@ const listQui = {
 	confirmedStudents: ["Jose", "vampeta", "42"]
 };
 const listSab = {
-	teacher: "Marcos",
-	address: "Rua a Número 1",
-	start: "8:10",
-	end: "10:10",
+	teacher: "Kuppis Kanno",
+	address: "Rua Top Lane t2",
+	start: "0:00",
+	end: "00:01",
 	confirmedPresence: true,
 	confirmedStudents: ["Slark", "Axe", "Keeper", "Lion", "Anti Mage", "Zeus", "Sniper", "Pudge", "Juggernaut", "Enigma"]
 };
@@ -35,7 +35,6 @@ export function presenceList(req, res) {
 	const token = authHeader.split(" ")[1];
 	const day = req.query.day;
 
-console.log(day)
 	if (token === "12345") {
 		if (day === "Qua") {
 			res.status(200).json(listQua);
