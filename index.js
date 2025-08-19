@@ -14,7 +14,8 @@ app.post("/login-token", loginToken);
 import { gameHistory } from "./sections/profile.js";
 app.get("/game-history", gameHistory);
 
-import { presenceList } from "./sections/home.js";
+import { presenceStudent, presenceList } from "./sections/home.js";
+app.post("/presence-student", presenceStudent);
 app.get("/presence-list", presenceList);
 
 app.listen(process.env.PORT || 3000, () => console.log("Servidor rodando"));

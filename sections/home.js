@@ -3,7 +3,7 @@ const listQua = {
 	address: "Rua a Número 1",
 	start: "8:10",
 	end: "10:10",
-	confirmedPresence: true,
+	confirmedPresence: false,
 	confirmedStudents: ["Natan do Egito", "Alexandre de Oliveira", "Aluno", "Aluno", "Aluno", "Aluno", "Aluno", "Aluno", "Aluno", "Aluno"]
 };
 const listQui = {
@@ -25,6 +25,27 @@ const listSab = {
 
 /**
  * @author VAMPETA
+ * @brief ROTA QUE O CLIENTE DEVE INFORMAR SE ELE VAI AO TREINO OU NAO
+ * @route /presence-student
+ * @returns 200 - REPONDE APENAS COM O STATUS
+ * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
+*/
+export function presenceStudent(req, res) {
+	const authHeader = req.headers["authorization"];
+	const token = authHeader.split(" ")[1];
+	const { presence } = req.body;
+
+	if (token === "12345") {
+		setTimeout(() => {
+			res.sendStatus(200);
+		}, 1000)
+	} else {
+		res.sendStatus(401);
+	}
+}
+
+/**
+ * @author VAMPETA
  * @brief ROTA QUE RETORNA OS DADOS DO CLIENTE
  * @route /presence-list
  * @returns {object} 200 - REPONDE COM A LISTA DE ALUNOS CONFIRMADOS PARA IR AO TREINO E ALGUMAS OUTRAS INFORMACOES DENTRO DO OBJETO
@@ -41,7 +62,9 @@ export function presenceList(req, res) {
 		} else if (day === "Qui") {
 			res.status(200).json(listQui);
 		} else if (day === "Sab") {
-			res.status(200).json(listSab);
+			setTimeout(() => {
+				res.status(200).json(listSab);
+			}, 2000)
 		}
 	} else {
 		res.sendStatus(401);
