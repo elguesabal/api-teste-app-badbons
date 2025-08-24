@@ -49,7 +49,9 @@ export function timetableUnits(req, res) {
  * @returns {object} 200 - RESPONDE APENAS COM STATUS 200 PARA INFORMAR QUE FOI FEITO O CADASTRO (O TOKEN E ENVIADO NO MOMENTO DO LOGIN)
 */
 export function register(req, res) {
-	res.sendStatus(200);
+	setTimeout(() => {
+		res.sendStatus(200);
+	}, 2000)
 }
 
 /**
