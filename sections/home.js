@@ -38,7 +38,7 @@ export function presenceStudent(req, res) {
 	if (token === "12345") {
 		setTimeout(() => {
 			res.sendStatus(200);
-		}, 1000)
+		}, 1000);
 	} else {
 		res.sendStatus(401);
 	}
@@ -64,7 +64,7 @@ export function presenceList(req, res) {
 		} else if (day === "Sab") {
 			setTimeout(() => {
 				res.status(200).json(listSab);
-			}, 2000)
+			}, 2000);
 		}
 	} else {
 		res.sendStatus(401);

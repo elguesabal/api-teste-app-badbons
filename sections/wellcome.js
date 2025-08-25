@@ -7,7 +7,9 @@
 export function ping(req, res) {
 	const version = req.query.version;
 
-	res.sendStatus((["1.0.0", "1.0.1", "1.0.2"].includes(version)) ? 200 : 426);
+	setTimeout(() => {
+		res.sendStatus((["1.0.0", "1.0.1", "1.0.2"].includes(version)) ? 200 : 426);
+	}, 2000)
 }
 
 /**
@@ -17,7 +19,9 @@ export function ping(req, res) {
  * @returns {array} 200 - RESPONDE COM ARRAY DE UNIDADES DISPONIVEIS
 */
 export function trainingLocations(req, res) {
-	res.status(200).json(["Barra da Tijuca", "Andaraí", "Madureira", "Bonsucesso", "Tijuca", "Guaratiba", "Lagoa", "Taquara"]);
+	setTimeout(() => {
+		res.status(200).json(["Barra da Tijuca", "Andaraí", "Madureira", "Bonsucesso", "Tijuca", "Guaratiba", "Lagoa", "Taquara"]);
+	}, 1000);
 }
 
 /**
@@ -39,7 +43,9 @@ export function timetableUnits(req, res) {
 	if (units.includes("Lagoa")) data.push({ unit: "Lagoa", address: "Rua Opnião Liberal, 315", classes: [{ day: "Sabado", start: "8:00", end: "9:30" }, { day: "Sabado", start: "9:30", end: "11:00" }, { day: "Sabado", start: "11:00", end: "13:30" }] });
 	if (units.includes("Taquara")) data.push({ unit: "Taquara", address: "Rua Opnião Liberal, 315", classes: [{ day: "Segunda", start: "8:00", end: "9:30" }, { day: "Terça", start: "9:30", end: "11:00" }, { day: "Sabado", start: "11:00", end: "13:30" }, { day: "Segunda", start: "8:00", end: "9:30" }, { day: "Terça", start: "9:30", end: "11:00" }, { day: "Sabado", start: "11:00", end: "13:30" }] });
 
-	res.status(200).json(data);
+	setTimeout(() => {
+		res.status(200).json(data);
+	}, 1000);
 }
 
 /**
@@ -65,20 +71,22 @@ export function loginCredentials(req, res) {
 	const { login, password } = req.body;
 
 	if (login === "Vampeta" && password === "123") {
-		res.status(200).send({
-			token: "12345",
-			photo: "https://ovicio.com.br/wp-content/uploads/2023/09/20230921-jujutsu-kaisen-gojo-555x555.jpg",
-			name: "Satoru Gojo",
-			email: "soladordesukuna@ryomen.com",
-			cpf: "Cancelado",
-			date: "07/12/1989",
-			phone: "(00) 00000-0000",
-			units: ["Shibuya", "Shinjuku", "Fukutoshin"],
-			times: {
-				Madureira: [ { day: "Quinta", start: "18:00", end: "19:30" }, { day: "Sabado", start: "9:00", end: "10:30" } ],
-				Bonsucesso: [ { day: "Quarta", start: "18:00", end: "20:00" } ]
-			}
-		});
+		setTimeout(() => {
+			res.status(200).send({
+				token: "12345",
+				photo: "https://ovicio.com.br/wp-content/uploads/2023/09/20230921-jujutsu-kaisen-gojo-555x555.jpg",
+				name: "Satoru Gojo",
+				email: "soladordesukuna@ryomen.com",
+				cpf: "Cancelado",
+				date: "07/12/1989",
+				phone: "(00) 00000-0000",
+				units: ["Shibuya", "Shinjuku", "Fukutoshin"],
+				times: {
+					Madureira: [ { day: "Quinta", start: "18:00", end: "19:30" }, { day: "Sabado", start: "9:00", end: "10:30" } ],
+					Bonsucesso: [ { day: "Quarta", start: "18:00", end: "20:00" } ]
+				}
+			});
+		}, 1000);
 	} else {
 		res.sendStatus(401);
 	}
@@ -96,7 +104,9 @@ export function loginToken(req, res) {
 	const { token } = req.body;
 
 	if (token === "12345") {
-		res.sendStatus(200);
+		setTimeout(() => {
+			res.sendStatus(200);
+		}, 1000);
 	} else {
 		res.sendStatus(401);
 	}

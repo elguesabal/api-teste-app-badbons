@@ -58,7 +58,9 @@ export function gameHistory(req, res) {
 	const token = authHeader.split(" ")[1];
 
 	if (token === "12345") {
-		res.status(200).json(events);
+		setTimeout(() => {
+			res.status(200).json(events);
+		}, 2000);
 	} else {
 		res.sendStatus(401);
 	}
