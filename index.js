@@ -1,15 +1,19 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 app.use(express.json());
+app.use("/img", express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), "img")));
 
-import { ping, trainingLocations, timetableUnits, register, loginCredentials, loginToken } from "./sections/wellcome.js";
+import { ping, trainingLocations, timetableUnits, register, loginCredentials, loginToken, img } from "./sections/wellcome.js";
 app.get("/ping", ping);
 app.get("/training-locations", trainingLocations);
 app.get("/timetable-units", timetableUnits);
 app.post("/register", register);
 app.post("/login", loginCredentials);
 app.post("/login-token", loginToken);
+app.get("/img/:img", img);
 
 import { gameHistory } from "./sections/profile.js";
 app.get("/game-history", gameHistory);

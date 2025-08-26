@@ -1,3 +1,6 @@
+import path from "path";
+import { fileURLToPath } from "url";
+
 /**
  * @author VAMPETA
  * @brief ROTA PING
@@ -74,7 +77,7 @@ export function loginCredentials(req, res) {
 		setTimeout(() => {
 			res.status(200).send({
 				token: "12345",
-				photo: "https://ovicio.com.br/wp-content/uploads/2023/09/20230921-jujutsu-kaisen-gojo-555x555.jpg",
+				photo: `${req.protocol}://${req.get("host")}/img/user`,
 				name: "Satoru Gojo",
 				email: "soladordesukuna@ryomen.com",
 				cpf: "Cancelado",
@@ -97,7 +100,7 @@ export function loginCredentials(req, res) {
  * @brief ROTA QUE LOGA USAND O TOKEN
  * @route /login-token
  * @returns {object} 200 - RESPONDE APENAS COM STATUS 200 PARA INFORMAR QUE O TOKEN AINDA E VALIDO
- * @returns {object} 401 - RESPONDE APENAS COM STATUS 200 PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
+ * @returns 401 - RESPONDE APENAS COM STATUS 200 PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
  * @warning NO FUTURO ESSA ROTA DEVE RETORNAR INFORMACOES DO USUARIO (OU NAO VAMOS VER NO DESENVOLVER DO APP)
 */
 export function loginToken(req, res) {
@@ -107,6 +110,24 @@ export function loginToken(req, res) {
 		setTimeout(() => {
 			res.sendStatus(200);
 		}, 1000);
+	} else {
+		res.sendStatus(401);
+	}
+}
+
+/**
+ * @author VAMPETA
+ * @brief ENVIA UMA IMAGEM DE ACORDO COM O PARAMETRO (FEITA INICIALMENTE PARA FOTO DE PERFIL)
+ * @route /img
+ * @returns {file} 200 - RESPONDE ENVIANDO UMA IMAGEM REQUERIDA
+*/
+export function img(req, res) {
+	const authHeader = req.headers["authorization"];
+	const token = authHeader.split(" ")[1];
+	const { img } = req.params;
+
+	if (token === "12345" && img === "user") {
+		res.sendFile(path.join(path.dirname(fileURLToPath(import.meta.url)), "../img/satoru.jpg"));
 	} else {
 		res.sendStatus(401);
 	}
