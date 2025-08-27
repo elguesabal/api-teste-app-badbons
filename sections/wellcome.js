@@ -72,6 +72,7 @@ export function register(req, res) {
 */
 export function loginCredentials(req, res) {
 	const { login, password } = req.body;
+console.log("testeeee: ", `${req.protocol}://${req.get("host")}/img/user`)
 
 	if (login === "Vampeta" && password === "123") {
 		setTimeout(() => {
