@@ -72,13 +72,12 @@ export function register(req, res) {
 */
 export function loginCredentials(req, res) {
 	const { login, password } = req.body;
-console.log("testeeee: ", `${req.protocol}://${req.get("host")}/img/user`)
 
 	if (login === "Vampeta" && password === "123") {
 		setTimeout(() => {
 			res.status(200).send({
 				token: "12345",
-				photo: `${req.protocol}://${req.get("host")}/img/user`,
+				photo: `${(req.headers["x-forwarded-proto"] || req.protocol).includes("https") ? "https" : "http"}://${req.get("host")}/img/user`,
 				name: "Satoru Gojo",
 				email: "soladordesukuna@ryomen.com",
 				cpf: "Cancelado",
