@@ -77,7 +77,7 @@ export function loginCredentials(req, res) {
 		setTimeout(() => {
 			res.status(200).send({
 				token: "12345",
-				photo: `${(req.headers["x-forwarded-proto"] || req.protocol).includes("https") ? "https" : "http"}://${req.get("host")}/img/user`,
+				photo: `${(req.headers["x-forwarded-proto"] || req.protocol).includes("https") ? "https" : "http"}://${req.get("host")}/img/user.jpg`,
 				name: "Satoru Gojo",
 				email: "soladordesukuna@ryomen.com",
 				cpf: "Cancelado",
@@ -126,7 +126,7 @@ export function img(req, res) {
 	const token = authHeader.split(" ")[1];
 	const { img } = req.params;
 
-	if (token === "12345" && img === "user") {
+	if (token === "12345" && img === "user.jpg") {
 		res.sendFile(path.join(path.dirname(fileURLToPath(import.meta.url)), "../img/satoru.jpg"));
 	} else {
 		res.sendStatus(401);
