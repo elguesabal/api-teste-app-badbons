@@ -1,3 +1,25 @@
+/**
+ * @author VAMPETA
+ * @brief ROTA QUE SALVA A NOVA FOTO DE PERFIL DO CLIENTE
+ * @route /upload-photo-profile
+ * @returns 200 - REPONDE APENAS COM O STATUS
+ * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
+*/
+export function uploadPhotoProfile(req, res) {
+	const authHeader = req.headers["authorization"];
+	const token = authHeader.split(" ")[1];
+
+	if (token === "12345") {
+		// if (req.file) { // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
+			setTimeout(() => {
+				res.sendStatus(200);
+			}, 2000);
+		// }
+	} else {
+		res.sendStatus(401);
+	}
+}
+
 const events = [
 	{
 		event: "Arco de Shibuya",
