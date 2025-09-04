@@ -8,15 +8,37 @@
 export function uploadPhotoProfile(req, res) {
 	const authHeader = req.headers["authorization"];
 	const token = authHeader.split(" ")[1];
+	// const img = req.file; // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
 
 	if (token === "12345") {
-		// if (req.file) { // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
+		// if (img) {
 			setTimeout(() => {
 				res.sendStatus(200);
 			}, 2000);
 		// }
 	} else {
 		res.sendStatus(401);
+	}
+}
+
+/**
+ * @author VAMPETA
+ * @brief ROTA QUE TROCA O EMAIL DO USUARIO
+ * @route /swap-email
+ * @returns 200 - REPONDE APENAS COM O STATUS
+ * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
+*/
+export function swapEmail(req, res) {
+	const authHeader = req.headers["authorization"];
+	const token = authHeader.split(" ")[1];
+	const { email, password } = req.body;
+
+	if (token === "12345") {
+		setTimeout(() => {
+			res.sendStatus(200);
+		}, 1000);
+	} else {
+		res.sendStatus(400);
 	}
 }
 
