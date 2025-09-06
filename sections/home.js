@@ -35,13 +35,8 @@ export function presenceStudent(req, res) {
 	const token = authHeader.split(" ")[1];
 	const { presence } = req.body;
 
-	if (token === "12345") {
-		setTimeout(() => {
-			res.sendStatus(200);
-		}, 1000);
-	} else {
-		res.sendStatus(401);
-	}
+	if (token !== "12345") return (res.sendStatus(401));
+	setTimeout(() => res.sendStatus(200), 1000);
 }
 
 /**
@@ -56,17 +51,8 @@ export function presenceList(req, res) {
 	const token = authHeader.split(" ")[1];
 	const day = req.query.day;
 
-	if (token === "12345") {
-		if (day === "Qua") {
-			res.status(200).json(listQua);
-		} else if (day === "Qui") {
-			res.status(200).json(listQui);
-		} else if (day === "Sab") {
-			setTimeout(() => {
-				res.status(200).json(listSab);
-			}, 2000);
-		}
-	} else {
-		res.sendStatus(401);
-	}
+	if (token !== "12345") return (res.sendStatus(401));
+	if (day === "Qua") res.status(200).json(listQua);
+	if (day === "Qui") res.status(200).json(listQui);
+	if (day === "Sab") setTimeout(() => res.status(200).json(listSab), 2000);
 }

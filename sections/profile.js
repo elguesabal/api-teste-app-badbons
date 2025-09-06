@@ -27,19 +27,34 @@ export function uploadPhotoProfile(req, res) {
  * @route /swap-email
  * @returns 200 - REPONDE APENAS COM O STATUS
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
+ * @returns 403 - REPONDE APENAS COM O STATUS SE O TOKEN FOR VALIDO MAS A SENHA INFORMADA ESTEJA ERRADA
 */
 export function swapEmail(req, res) {
 	const authHeader = req.headers["authorization"];
 	const token = authHeader.split(" ")[1];
-	const { email, password } = req.body;
+	const { newEmail, password } = req.body;
 
-	if (token === "12345") {
-		setTimeout(() => {
-			res.sendStatus(200);
-		}, 1000);
-	} else {
-		res.sendStatus(400);
-	}
+	if (token !== "12345") return (res.sendStatus(401));
+	if (password !== "123") return (res.sendStatus(403));
+	setTimeout(() => res.sendStatus(200), 1000);
+}
+
+/**
+ * @author VAMPETA
+ * @brief ROTA QUE TROCA A SENHA DO USUARIO
+ * @route /swap-password
+ * @returns 200 - REPONDE APENAS COM O STATUS
+ * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
+ * @returns 403 - REPONDE APENAS COM O STATUS SE O TOKEN FOR VALIDO MAS A SENHA INFORMADA ESTEJA ERRADA
+*/
+export function swapPassword(req, res) {
+	const authHeader = req.headers["authorization"];
+	const token = authHeader.split(" ")[1];
+	const { newPassword, password } = req.body;
+
+	if (token !== "12345") return (res.sendStatus(401));
+	if (password !== "123") return (res.sendStatus(403));
+	setTimeout(() => res.sendStatus(200), 1000);
 }
 
 const events = [
@@ -101,11 +116,6 @@ export function gameHistory(req, res) {
 	const authHeader = req.headers["authorization"];
 	const token = authHeader.split(" ")[1];
 
-	if (token === "12345") {
-		setTimeout(() => {
-			res.status(200).json(events);
-		}, 2000);
-	} else {
-		res.sendStatus(401);
-	}
+	if (token !== "12345") return (res.sendStatus(401));
+	setTimeout(() => res.status(200).json(events), 2000);
 }

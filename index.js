@@ -27,10 +27,11 @@ app.post("/login", loginCredentials);
 app.post("/login-token", loginToken);
 app.get("/img/:img", img);
 
-import { uploadPhotoProfile, swapEmail, gameHistory } from "./sections/profile.js";
+import { uploadPhotoProfile, swapEmail, swapPassword, gameHistory } from "./sections/profile.js";
 // app.post("/upload-photo-profile", upload.single("photo"), uploadPhotoProfile); // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
 app.post("/upload-photo-profile", uploadPhotoProfile);
 app.post("/swap-email", swapEmail);
+app.post("/swap-password", swapPassword);
 app.get("/game-history", gameHistory);
 
 import { presenceStudent, presenceList } from "./sections/home.js";
