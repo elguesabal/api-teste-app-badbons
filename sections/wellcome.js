@@ -3,9 +3,10 @@ import { fileURLToPath } from "url";
 
 /**
  * @author VAMPETA
- * @brief ROTA PING
+ * @brief ROTA PING QUE VERIFICA SE A VERSAO DO APP E COMPATIVEL COM A API
  * @route /ping
- * @returns {object} 200 - REPONDE COM UM ARRAY DE VERSOES DO APP COMPATIVEIS COM A API
+ * @returns 200 - RESPONDE APENAS COM O STATUS SE A API FOR COMPATIVEL
+ * @returns 426 - RESPONDE APENAS COM O STATUS SE A API NAO FOR COMPATIVEL
 */
 export function ping(req, res) {
 	const version = req.query.version;
