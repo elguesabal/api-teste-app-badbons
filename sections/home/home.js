@@ -26,7 +26,10 @@ const listSab = {
 /**
  * @author VAMPETA
  * @brief ROTA QUE O CLIENTE DEVE INFORMAR SE ELE VAI AO TREINO OU NAO
+ * @method POST
  * @route /presence-student
+ * @param {string} headers.authorization TOKEN DO USUARIO
+ * @param {boolean} body.presence CONFIRMACAO DE PRESENCA NO TREINO
  * @returns 200 - REPONDE APENAS COM O STATUS
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
@@ -41,8 +44,11 @@ export function presenceStudent(req, res) {
 
 /**
  * @author VAMPETA
- * @brief ROTA QUE RETORNA OS DADOS DO CLIENTE
+ * @brief ROTA QUE RETORNA A LISTA DE PRESENCA
+ * @method POST
  * @route /presence-list
+ * @param {string} headers.authorization TOKEN DO USUARIO
+ * @param {string} queri.day DIA QUE O USUARIO ESTA CONSULTANDO
  * @returns {object} 200 - REPONDE COM A LISTA DE ALUNOS CONFIRMADOS PARA IR AO TREINO E ALGUMAS OUTRAS INFORMACOES DENTRO DO OBJETO
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */

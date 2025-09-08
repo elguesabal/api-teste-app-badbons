@@ -5,7 +5,9 @@ import { versions } from "./versions.js";
 /**
  * @author VAMPETA
  * @brief ROTA PING QUE VERIFICA SE A VERSAO DO APP E COMPATIVEL COM A API
+ * @method GET
  * @route /ping
+ * @param {string} query.version VERSAO DO APP
  * @returns 200 - RESPONDE APENAS COM O STATUS SE A API FOR COMPATIVEL
  * @returns 426 - RESPONDE APENAS COM O STATUS SE A API NAO FOR COMPATIVEL
 */
@@ -19,6 +21,7 @@ import { units } from "./units.js";
 /**
  * @author VAMPETA
  * @brief ROTA PARA CONSULTAR OS LOCAIS DE TREINO DISPONIVEIS
+ * @method GET
  * @route /training-locations
  * @returns {array} 200 - RESPONDE COM ARRAY DE UNIDADES DISPONIVEIS
 */
@@ -30,8 +33,10 @@ import { barraDaTijuca, andarai, madureira, bonsucesso, tijuca, guaratiba, lagoa
 /**
  * @author VAMPETA
  * @brief ROTA PARA CONSULTAR HORARIOS DISPONIVEIS
+ * @method GET
  * @route /timetable-units
- * @returns {object} 200 - RESPONDE COM ARRAY DE HORARIOS DISPONIVEIS PARA CADA UNIDADE SELECIONADA
+ * @param {string[]} query.units ARRAY COM UNIDADES
+ * @returns {object[]} 200 - RESPONDE COM ARRAY DE HORARIOS DISPONIVEIS PARA CADA UNIDADE SELECIONADA
 */
 export function timetableUnits(req, res) {
 	const units = req.query["units[]"];
@@ -52,8 +57,15 @@ export function timetableUnits(req, res) {
 /**
  * @author VAMPETA
  * @brief ROTA DE REGISTRO
+ * @method POST
  * @route /register
- * @returns {object} 200 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE FOI FEITO O CADASTRO (O TOKEN E ENVIADO NO MOMENTO DO LOGIN)
+ * @param {string} body.email EMAIL 
+ * @param {string} body.password SENHA
+ * @param {string} body.cpf CPF
+ * @param {string} body.date DATA DE NASCIMENTO
+ * @param {string} body.phone NUMERO DE TELEFONE CELULAR
+ * @param {object} body.times UNIDADES E HORARIOS ESCOLHIDOS PARA TREINO
+ * @returns 200 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE FOI FEITO O CADASTRO (O TOKEN E ENVIADO NO MOMENTO DO LOGIN)
 */
 export function register(req, res) {
 	const { email, password, cpf, date, phone, times } = req.body;
@@ -65,9 +77,12 @@ import { credentials } from "./credentials.js";
 /**
  * @author VAMPETA
  * @brief ROTA DE LOGIN
+ * @method POST
  * @route /login
+ * @param {string} body.login login
+ * @param {string} body.password senha
  * @returns {object} 200 - ENVIA O TOKEN DO USUARIO QUE ELE VAI USAR EM REQUISICOES FUTURAS E MAIS OS DADOS DO CLIENTE
- * @returns {object} 401 - MENSAGEM DE ERRO AO TENTAR LOGAR COM LOGIN OU SENHA ERRADA
+ * @returns 401 - MENSAGEM DE ERRO AO TENTAR LOGAR COM LOGIN OU SENHA ERRADA
 */
 export function loginCredentials(req, res) {
 	const { login, password } = req.body;
@@ -79,7 +94,9 @@ export function loginCredentials(req, res) {
 /**
  * @author VAMPETA
  * @brief ROTA QUE LOGA USAND O TOKEN
+ * @method POST
  * @route /login-token
+ * @param {string} body.token TOKEN DO USUARIO
  * @returns {object} 200 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN AINDA E VALIDO
  * @returns 401 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
 */
@@ -93,7 +110,10 @@ export function loginToken(req, res) {
 /**
  * @author VAMPETA
  * @brief ENVIA UMA IMAGEM DE ACORDO COM O PARAMETRO (FEITA INICIALMENTE PARA FOTO DE PERFIL)
+ * @method GET
  * @route /img
+ * @param {string} headers.authorization TOKEN DO USUARIO
+ * @param {string} param.img NOME DA IMAGEM
  * @returns {file} 200 - RESPONDE ENVIANDO UMA IMAGEM REQUERIDA
  * @returns 401 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
  * @returns 404 - RESPONDE APENAS COM STATUS CASO O PARAMETRO "img" NAO SEJA UM NOME DE IMAGEM DISPONIVEL
