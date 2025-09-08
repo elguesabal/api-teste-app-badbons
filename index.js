@@ -18,7 +18,7 @@ app.use("/img", express.static(path.join(path.dirname(fileURLToPath(import.meta.
 // const upload = multer({ storage });
 
 
-import { ping, trainingLocations, timetableUnits, register, loginCredentials, loginToken, img } from "./sections/wellcome.js";
+import { ping, trainingLocations, timetableUnits, register, loginCredentials, loginToken, img } from "./sections/wellcome/wellcome.js";
 app.get("/ping", ping);
 app.get("/training-locations", trainingLocations);
 app.get("/timetable-units", timetableUnits);
