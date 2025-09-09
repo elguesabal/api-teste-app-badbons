@@ -1,28 +1,3 @@
-const listQua = {
-	teacher: "Marcos",
-	address: "Rua a Número 1",
-	start: "8:10",
-	end: "10:10",
-	confirmedPresence: false,
-	confirmedStudents: ["Natan do Egito", "Alexandre de Oliveira", "Aluno", "Aluno", "Aluno", "Aluno", "Aluno", "Aluno", "Aluno", "Aluno"]
-};
-const listQui = {
-	teacher: "Marcos",
-	address: "Rua a Número 1",
-	start: "8:10",
-	end: "10:10",
-	confirmedPresence: true,
-	confirmedStudents: ["Jose", "vampeta", "42"]
-};
-const listSab = {
-	teacher: "Kuppis Kanno",
-	address: "Rua Top Lane t2",
-	start: "0:00",
-	end: "00:01",
-	confirmedPresence: true,
-	confirmedStudents: ["Slark", "Axe", "Keeper", "Lion", "Anti Mage", "Zeus", "Sniper", "Pudge", "Juggernaut", "Enigma"]
-};
-
 /**
  * @author VAMPETA
  * @brief ROTA QUE O CLIENTE DEVE INFORMAR SE ELE VAI AO TREINO OU NAO
@@ -34,18 +9,18 @@ const listSab = {
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function presenceStudent(req, res) {
-	const authHeader = req.headers["authorization"];
-	const token = authHeader.split(" ")[1];
+	const token = req.headers["authorization"].split(" ")[1];
 	const { presence } = req.body;
 
 	if (token !== "12345") return (res.sendStatus(401));
 	setTimeout(() => res.sendStatus(200), 1000);
 }
 
+import { segunda, terca, quarta, quinta, sexta, sabado, domingo } from "./days.js";
 /**
  * @author VAMPETA
  * @brief ROTA QUE RETORNA A LISTA DE PRESENCA
- * @method POST
+ * @method GET
  * @route /presence-list
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @param {string} queri.day DIA QUE O USUARIO ESTA CONSULTANDO
@@ -53,12 +28,11 @@ export function presenceStudent(req, res) {
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function presenceList(req, res) {
-	const authHeader = req.headers["authorization"];
-	const token = authHeader.split(" ")[1];
+	const token = req.headers["authorization"].split(" ")[1];
 	const day = req.query.day;
 
 	if (token !== "12345") return (res.sendStatus(401));
-	if (day === "Qua") res.status(200).json(listQua);
-	if (day === "Qui") res.status(200).json(listQui);
-	if (day === "Sab") setTimeout(() => res.status(200).json(listSab), 2000);
+	if (day === "Qua") res.status(200).json(quarta);
+	if (day === "Qui") res.status(200).json(quinta);
+	if (day === "Sab") setTimeout(() => res.status(200).json(sabado), 2000);
 }

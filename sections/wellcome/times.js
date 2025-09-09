@@ -10,6 +10,7 @@ export const barraDaTijuca = {
 		{ day: "Sabado", start: "11:00", end: "13:30" }
 	]
 };
+
 export const andarai = {
 	unit: "Andaraí",
 	address: "Rua Opnião Liberal, 315",
@@ -19,6 +20,7 @@ export const andarai = {
 		{ day: "Quinta", start: "11:00", end: "13:30" }
 	]
 };
+
 export const madureira = {
 	unit: "Madureira",
 	address: "Rua Opnião Liberal, 315",
@@ -28,6 +30,7 @@ export const madureira = {
 		{ day: "Quinta", start: "11:00", end: "13:30" }
 	]
 };
+
 export const bonsucesso = {
 	unit: "Bonsucesso",
 	address: "Rua Opnião Liberal, 315",
@@ -37,6 +40,7 @@ export const bonsucesso = {
 		{ day: "Quarta", start: "11:00", end: "13:30" }
 	]
 };
+
 export const tijuca = {
 	unit: "Tijuca",
 	address: "Rua Opnião Liberal, 315",
@@ -49,6 +53,7 @@ export const tijuca = {
 		{ day: "Sabado", start: "11:00", end: "13:30" }
 	]
 };
+
 export const guaratiba = {
 	unit: "Guaratiba",
 	address: "Rua Opnião Liberal, 315",
@@ -67,6 +72,7 @@ export const lagoa = {
 		{ day: "Sabado", start: "11:00", end: "13:30" }
 	]
 };
+
 export const taquara = {
 	unit: "Taquara",
 	address: "Rua Opnião Liberal, 315",

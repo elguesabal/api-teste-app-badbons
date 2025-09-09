@@ -119,8 +119,7 @@ export function loginToken(req, res) {
  * @returns 404 - RESPONDE APENAS COM STATUS CASO O PARAMETRO "img" NAO SEJA UM NOME DE IMAGEM DISPONIVEL
 */
 export function img(req, res) {
-	const authHeader = req.headers["authorization"];
-	const token = authHeader.split(" ")[1];
+	const token = req.headers["authorization"].split(" ")[1];
 	const { img } = req.params;
 
 	if (token !== "12345") return (res.sendStatus(401));
