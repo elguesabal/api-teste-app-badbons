@@ -255,3 +255,98 @@ Content-Type: application/json
 	}
 ]
 ```
+
+
+
+---
+---
+---
+---
+---
+
+
+
+### Rota para buscar as notificações do usuário.
+```https
+  GET /notifications
+```
+
+---
+
+### Cabeçalhos (Headers)
+| Parâmetro       | Tipo     | Obrigatório | Descrição                        |
+|-----------------|----------|-------------|----------------------------------|
+| `Authorization` | `string` | Sim         | Token do usuário.                |
+
+---
+
+### Respostas
+| Código | Descrição                                                          |
+|--------|--------------------------------------------------------------------|
+| `200`  | A API retorna o hitórico de notificaçõs.                           |
+| `401`  | Token expirado ou inválido.                                        |
+
+---
+
+### Exemplo de Requisição
+```https
+GET /notifications
+Authorization: Bearer 12345
+```
+
+### Exemplo de Resposta (status 200)
+```https
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+	{
+		viewed: false,
+		title: "NDB NEWS",
+		time: "10 min",
+		message: "Quartas de Final - Vencedor Igor Coelho"
+	},
+	{
+		viewed: false,
+		title: "Torneio Amigo",
+		time: "15min",
+		message: "Final - Vencedor Natan Roldão"
+	},
+	{
+		viewed: false,
+		title: "Loja BadBons",
+		time: "20min",
+		message: "Camisas Novas já estão liberadas, confira!"
+	},
+	{
+		viewed: true,
+		title: "Equipe BadBons",
+		time: "20min",
+		message: "Aula de Reposição para a Tijuca, Dia 10 das 9:00 às 10:00"
+	},
+	{
+		viewed: false,
+		title: "NDB NEWS",
+		time: "10 min",
+		message: "Quartas de Final - Vencedor Igor Coelho"
+	},
+	{
+		viewed: false,
+		title: "Torneio Amigo",
+		time: "15min",
+		message: "Final - Vencedor Natan Roldão"
+	},
+	{
+		viewed: false,
+		title: "Loja BadBons",
+		time: "20min",
+		message: "Camisas Novas já estão liberadas, confira!"
+	},
+	{
+		viewed: true,
+		title: "Equipe BadBons",
+		time: "20min",
+		message: "Aula de Reposição para a Tijuca, Dia 10 das 9:00 às 10:00"
+	}
+]
+```

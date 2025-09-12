@@ -76,3 +76,20 @@ export function gameHistory(req, res) {
 	if (token !== "12345") return (res.sendStatus(401));
 	setTimeout(() => res.status(200).json(events), 2000);
 }
+
+import { listNotifications } from "./listNotifications.js";
+/**
+ * @author VAMPETA
+ * @brief ROTA QUE RETORNA AS NOTIFICACOES DO USUARIO
+ * @method GET
+ * @route /notifications
+ * @param {string} headers.authorization TOKEN DO USUARIO
+ * @returns {object} 200 - REPONDE COM AS NOTIFICACOS DO USUARIOS
+ * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
+*/
+export function notifications(req, res) {
+	const token = req.headers["authorization"].split(" ")[1];
+
+	if (token !== "12345") return (res.sendStatus(401));
+	setTimeout(() => res.status(200).json(listNotifications), 2000);
+}
