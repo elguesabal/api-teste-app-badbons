@@ -77,19 +77,27 @@ export function gameHistory(req, res) {
 	setTimeout(() => res.status(200).json(events), 2000);
 }
 
-import { listNotifications } from "./listNotifications.js";
+import { listNotifications1, listNotifications2 } from "./listNotifications.js";
 /**
  * @author VAMPETA
  * @brief ROTA QUE RETORNA AS NOTIFICACOES DO USUARIO
  * @method GET
  * @route /notifications
  * @param {string} headers.authorization TOKEN DO USUARIO
+ * @param {number} query.page PAGINA DE NOTIFICACOES (EXEMPLO: A 1° PAGINA CONTEM AS 15 ULTIMAS NOTIFICACOES E A 2° PAGINA CONTEM AS NOTIFICACOES 16 ATE A 30)
  * @returns {object} 200 - REPONDE COM AS NOTIFICACOS DO USUARIOS
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function notifications(req, res) {
 	const token = req.headers["authorization"].split(" ")[1];
+	const { page } = req.query;
 
 	if (token !== "12345") return (res.sendStatus(401));
-	setTimeout(() => res.status(200).json(listNotifications), 2000);
+	if (page === "1") {
+		setTimeout(() => res.status(200).json(listNotifications1), 1000);
+	} else if (page === "2") {
+		setTimeout(() => res.status(200).json(listNotifications2), 1000);
+	} else {
+		setTimeout(() => res.status(200).json([]), 1000);
+	}
 }

@@ -12,7 +12,7 @@ import { versions } from "./versions.js";
  * @returns 426 - RESPONDE APENAS COM O STATUS SE A API NAO FOR COMPATIVEL
 */
 export function ping(req, res) {
-	const version = req.query.version;
+	const { version } = req.query;
 
 	setTimeout(() => res.sendStatus((versions.includes(version)) ? 200 : 426), 2000);
 }
