@@ -318,10 +318,10 @@ HTTP/1.1 200 OK
 
 ---
 
-### Parâmetros do Body
-| Parâmetro  | Tipo     | Obrigatório | Descrição                             |
-|------------|----------|-------------|---------------------------------------|
-| `token`    | `string` | Sim         | Token do usuário.                     |
+### Cabeçalhos (Headers)
+| Parâmetro       | Tipo     | Obrigatório | Descrição                        |
+|-----------------|----------|-------------|----------------------------------|
+| `Authorization` | `string` | Sim         | Token do usuário.                |
 
 ---
 
@@ -336,11 +336,7 @@ HTTP/1.1 200 OK
 ### Exemplo de Requisição
 ```https
 POST /login-token
-Content-Type: application/json
-
-{
-    token: "123"
-}
+Authorization: Bearer 12345
 ```
 
 ### Exemplo de Resposta (status 200)

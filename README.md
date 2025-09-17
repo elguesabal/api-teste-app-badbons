@@ -34,7 +34,8 @@ Este repositório documenta todas as rotas da API BadBons, incluindo exemplos de
 | [`/swap-email`](sections/profile#swap-email)  | Alterar e-mail.                                |
 | [`/swap-password`](sections/profile#swap-password) | Alterar senha.                            |
 | [`/game-history`](sections/profile#game-history) | Histórico de partidas do usuário.           |
-| [`/notifications`](sections/profile#notifications) | Notificaçõs do usuário.                   |
+| [`/notifications`](sections/profile#notifications) | Notificações do usuário.                  |
+| [`/notification`](sections/profile#notification) | Notificação específica.                     |
 
 ---
 

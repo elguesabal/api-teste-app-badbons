@@ -1,7 +1,7 @@
 /**
  * @author VAMPETA
  * @brief ROTA QUE SALVA A NOVA FOTO DE PERFIL DO CLIENTE
- * @method POST
+ * @method PATCH
  * @route /upload-photo-profile
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @param {Express.Multer.File} body.file IMAGEM ENVIADA PELO USUARIO VIA multipart/form-data (NESSE MOMENTO ESSE PARAMETRO NAO ESTA SENDO OBRIGATORIO POR ESTA DESABILITADO)
@@ -100,4 +100,28 @@ export function notifications(req, res) {
 	} else {
 		setTimeout(() => res.status(200).json([]), 1000);
 	}
+}
+
+import { notification1, notification2, notification3, notification4, notification5 } from "./notification.js";
+/**
+ * @author VAMPETA
+ * @brief ROTA QUE BUSCA UMA NOTIFICACAO EXPECIFICA
+ * @method GET
+ * @route /notification
+ * @param {string} headers.authorization TOKEN DO USUARIO
+ * @param {number} query.id ID DA NOTIFICACAO
+ * @returns {object} 200 - REPONDE COM A NOTIFICACAO REQUERIDA
+ * @returns 404 - RESPONDE APENAS COM O STATUS SE A NOTIFICACAO NAO EXISTIR
+*/
+export function notification(req, res) {
+	const token = req.headers["authorization"].split(" ")[1];
+	const { id } = req.query;
+
+	if (token !== "12345") return (res.sendStatus(401));
+	if (id === "1") return (res.status(200).json(notification1));
+	if (id === "2") return (res.status(200).json(notification2));
+	if (id === "3") return (res.status(200).json(notification3));
+	if (id === "4") return (res.status(200).json(notification4));
+	if (id === "5") return (res.status(200).json(notification5));
+	setTimeout(() => res.sendStatus(404), 1000);
 }

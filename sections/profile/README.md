@@ -6,7 +6,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 
 ### Salva a imagem de perfil do usuário.
 ```https
-  POST /upload-photo-profile
+  PATCH /upload-photo-profile
 ```
 
 ---
@@ -36,7 +36,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 
 ### Exemplo de Requisição
 ```https
-POST /upload-photo-profile
+PATCH /upload-photo-profile
 Authorization: Bearer 12345
 Content-Type: multipart/form-data
 
@@ -413,4 +413,61 @@ Content-Type: application/json
 		message: "Camisas Novas já estão liberadas, confira!"
 	}
 ]
+```
+
+
+
+---
+---
+---
+---
+---
+
+
+
+### Rota para buscar uma notificações específica.
+```https
+  GET /notification
+```
+
+---
+
+### Cabeçalhos (Headers)
+| Parâmetro       | Tipo     | Obrigatório | Descrição                        |
+|-----------------|----------|-------------|----------------------------------|
+| `Authorization` | `string` | Sim         | Token do usuário.                |
+
+---
+
+### Parâmetros de Query
+| Parâmetro  | Tipo     | Obrigatório | Descrição                              |
+|------------|----------|-------------|----------------------------------------|
+| `id`       | `string` | Sim         | Id da notificação.                     |
+
+---
+
+### Respostas
+| Código | Descrição                                                          |
+|--------|--------------------------------------------------------------------|
+| `200`  | A API retorna o hitórico de notificaçõs.                           |
+| `401`  | Token expirado ou inválido.                                        |
+| `404`  | Notificação não encontrada.                                        |
+
+---
+
+### Exemplo de Requisição
+```https
+GET /notifications?id=3
+Authorization: Bearer 12345
+```
+
+### Exemplo de Resposta (status 200)
+```https
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+	title: "What is Lorem Ipsum? 3",
+	text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+}
 ```

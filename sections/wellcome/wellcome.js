@@ -96,12 +96,12 @@ export function loginCredentials(req, res) {
  * @brief ROTA QUE LOGA USAND O TOKEN
  * @method POST
  * @route /login-token
- * @param {string} body.token TOKEN DO USUARIO
+ * @param {string} headers.authorization TOKEN DO USUARIO
  * @returns {object} 200 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN AINDA E VALIDO
  * @returns 401 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
 */
 export function loginToken(req, res) {
-	const { token } = req.body;
+	const token = req.headers["authorization"].split(" ")[1];
 
 	if (token !== "12345") return (res.sendStatus(401));
 	setTimeout(() => res.sendStatus(200), 1000);
