@@ -73,22 +73,40 @@ export function register(req, res) {
 	setTimeout(() => res.sendStatus(200), 2000)
 }
 
-import { credentials } from "./credentials.js";
+// import { credentials } from "./credentials.js";
+import { getLoginToken } from "./login-token.js";
 /**
  * @author VAMPETA
  * @brief ROTA DE LOGIN
  * @method POST
  * @route /login
- * @param {string} body.login login
- * @param {string} body.password senha
+ * @param {string} body.email LOGIN
+ * @param {string} body.password SENHA
  * @returns {object} 200 - ENVIA O TOKEN DO USUARIO QUE ELE VAI USAR EM REQUISICOES FUTURAS E MAIS OS DADOS DO CLIENTE
  * @returns 401 - MENSAGEM DE ERRO AO TENTAR LOGAR COM LOGIN OU SENHA ERRADA
 */
 export function loginCredentials(req, res) {
-	const { login, password } = req.body;
+	const { email, password } = req.body;
 
-	if (login !== "Vampeta" || password !== "123") return (res.sendStatus(401));
-	setTimeout(() => res.status(200).send(credentials(req)), 1000);
+	if (email !== "Vampeta" || password !== "123") return (res.sendStatus(401));
+	setTimeout(() => res.status(200).send(getLoginToken()), 1000);
+}
+
+import { getCredentials } from "./credentials.js";
+/**
+ * @author VAMPETA
+ * @brief ROTA QUE INFORMA AS CREDENCIAIS DO USUARIO
+ * @method GET
+ * @route /credencitals
+ * @param {string} headers.authorization TOKEN DO USUARIO
+ * @returns {object} 200 - RESPONDE COM AS CREDENCIAIS DO USUARIO
+ * @returns 401 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
+*/
+export function credentials(req, res) {
+	const token = req.headers["authorization"].split(" ")[1];
+
+	if (token !== "12345") return (res.sendStatus(401));
+	res.status(200).send(getCredentials(req));
 }
 
 /**

@@ -252,7 +252,7 @@ HTTP/1.1 200 OK
 ### Parâmetros do Body
 | Parâmetro  | Tipo     | Obrigatório | Descrição                             |
 |------------|----------|-------------|---------------------------------------|
-| `login`    | `string` | Sim         | Login do usuário.                     |
+| `email`    | `string` | Sim         | Login do usuário.                     |
 | `password` | `string` | Sim         | Senha de acesso.                      |
 
 ---
@@ -271,6 +271,59 @@ POST /login
 Content-Type: application/json
 
 {
+    email: "email@dominio.com",
+    password: "123"
+}
+```
+
+### Exemplo de Resposta (status 200)
+```https
+HTTP/1.1 200 OK
+
+{
+		RefreshToken: "12345",
+		accesstoken: "54321"
+}
+```
+
+
+
+---
+---
+---
+---
+---
+
+
+
+### Rota de credenciais.
+```https
+  GET /credentials
+```
+
+---
+
+### Cabeçalhos (Headers)
+| Parâmetro       | Tipo     | Obrigatório | Descrição                        |
+|-----------------|----------|-------------|----------------------------------|
+| `Authorization` | `string` | Sim         | Token do usuário.                |
+
+---
+
+### Respostas
+| Código | Descrição                                                          |
+|--------|--------------------------------------------------------------------|
+| `200`  | Login bem-sucedido.                                                |
+| `401`  | Token expirado ou inválido.                                        |
+
+---
+
+### Exemplo de Requisição
+```https
+GET /credentials
+Content-Type: application/json
+
+{
     login: "login",
     password: "123"
 }
@@ -281,7 +334,6 @@ Content-Type: application/json
 HTTP/1.1 200 OK
 
 {
-    token: "12345",
     photo: "https://api-teste-app-badbons.vercel.app/img/user.jpg",
     name: "Satoru Gojo",
     email: "soladordesukuna@ryomen.com",

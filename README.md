@@ -22,8 +22,9 @@ Este repositório documenta todas as rotas da API BadBons, incluindo exemplos de
 | [`/timetable-units`](sections/wellcome#timetable-units) | Mostra horários de treino.           |
 | [`/register`](sections/wellcome#register)     | Cria uma nova conta.                           |
 | [`/login`](sections/wellcome#login)           | Login do usuário.                              |
+| [`/credentials`](sections/wellcome#credentials) | Credenciais do usuário.                      |
 | [`/login-token`](sections/wellcome#login-token) | Login usando token.                          |
-| [`/img/:img`](sections/wellcome#img)          | Retorna imagem pelo nome.        |
+| [`/img/:img`](sections/wellcome#img)          | Retorna imagem pelo nome.                      |
 
 ---
 

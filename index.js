@@ -18,18 +18,22 @@ app.use("/img", express.static(path.join(path.dirname(fileURLToPath(import.meta.
 // const upload = multer({ storage });
 
 
-import { ping, trainingLocations, timetableUnits, register, loginCredentials, loginToken, img } from "./sections/wellcome/wellcome.js";
+import { ping, trainingLocations, timetableUnits, register, loginCredentials, credentials, loginToken, img } from "./sections/wellcome/wellcome.js";
 app.get("/ping", ping);
 app.get("/training-locations", trainingLocations);
 app.get("/timetable-units", timetableUnits);
 app.post("/register", register);
-app.post("/login", loginCredentials);
-app.post("/login-token", loginToken);
+// app.post("/login", loginCredentials);
+app.post("/auth/login", loginCredentials);
+app.post("/credentials", credentials);
+// app.post("/login-token", loginToken);
+app.post("/auth/login-token", loginToken);
 app.get("/img/:img", img);
 
 import { uploadPhotoProfile, swapEmail, swapPassword, gameHistory, notifications, notification } from "./sections/profile/profile.js";
 // app.patch("/upload-photo-profile", upload.single("photo"), uploadPhotoProfile); // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
-app.patch("/upload-photo-profile", uploadPhotoProfile);
+// app.patch("/upload-photo-profile", uploadPhotoProfile);
+app.patch("/user/update-image", uploadPhotoProfile);
 app.post("/swap-email", swapEmail);
 app.post("/swap-password", swapPassword);
 app.get("/game-history", gameHistory);
