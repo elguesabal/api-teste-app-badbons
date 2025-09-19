@@ -25,7 +25,7 @@ app.get("/timetable-units", timetableUnits);
 app.post("/register", register);
 // app.post("/login", loginCredentials);
 app.post("/auth/login", loginCredentials);
-app.post("/credentials", credentials);
+app.get("/auth/credentials", credentials);
 // app.post("/login-token", loginToken);
 app.post("/auth/login-token", loginToken);
 app.get("/img/:img", img);

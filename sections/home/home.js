@@ -29,10 +29,12 @@ import { segunda, terca, quarta, quinta, sexta, sabado, domingo } from "./days.j
 */
 export function presenceList(req, res) {
 	const token = req.headers["authorization"].split(" ")[1];
-	const day = req.query.day;
+	const { date } = req.query;
+	const [day, month, year] = date.split("/");
+	const newDate = new Date(`${year}-${month}-${day}`);
 
 	if (token !== "12345") return (res.sendStatus(401));
-	if (day === "Qua") res.status(200).json(quarta);
-	if (day === "Qui") res.status(200).json(quinta);
-	if (day === "Sab") setTimeout(() => res.status(200).json(sabado), 2000);
+	if (newDate.getDay() === 2) res.status(200).json(quarta);
+	if (newDate.getDay() === 3) res.status(200).json(quinta);
+	if (newDate.getDay() === 5) setTimeout(() => res.status(200).json(sabado), 2000);
 }

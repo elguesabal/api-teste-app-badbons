@@ -2,7 +2,7 @@
  * @author VAMPETA
  * @brief ROTA QUE SALVA A NOVA FOTO DE PERFIL DO CLIENTE
  * @method PATCH
- * @route /upload-photo-profile
+ * @route /user/update-image
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @param {Express.Multer.File} body.file IMAGEM ENVIADA PELO USUARIO VIA multipart/form-data (NESSE MOMENTO ESSE PARAMETRO NAO ESTA SENDO OBRIGATORIO POR ESTA DESABILITADO)
  * @returns 200 - RESPONDE APENAS COM O STATUS

@@ -15,33 +15,33 @@ Este repositório documenta todas as rotas da API BadBons, incluindo exemplos de
 ---
 
 ## 🔐 Login e Cadastro
-| Rota                                          | Descrição                                      |
-|-----------------------------------------------|------------------------------------------------|
-| [`/ping`](sections/wellcome#ping)             | Verifica se a API está online.                 |
-| [`/training-locations`](sections/wellcome#training-locations) | Lista locais de treino.        |
-| [`/timetable-units`](sections/wellcome#timetable-units) | Mostra horários de treino.           |
-| [`/register`](sections/wellcome#register)     | Cria uma nova conta.                           |
-| [`/login`](sections/wellcome#login)           | Login do usuário.                              |
-| [`/credentials`](sections/wellcome#credentials) | Credenciais do usuário.                      |
-| [`/login-token`](sections/wellcome#login-token) | Login usando token.                          |
-| [`/img/:img`](sections/wellcome#img)          | Retorna imagem pelo nome.                      |
+| Rota                                                                      | Descrição                                                                 |
+|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| [`/ping`](sections/wellcome#ping)                                         | Verifica se a API está online.                                            |
+| [`/training-locations`](sections/wellcome#training-locations)             | Lista locais de treino.                                                   |
+| [`/timetable-units`](sections/wellcome#timetable-units)                   | Mostra horários de treino.                                                |
+| [`/register`](sections/wellcome#register)                                 | Cria uma nova conta.                                                      |
+| [`/auth/login`](sections/wellcome#/auth/login-token)                      | Login do usuário.                                                         |
+| [`/credentials`](sections/wellcome#credentials)                           | Credenciais do usuário.                                                   |
+| [`/auth/login-token`](sections/wellcome#/auth/login-token)                | Login usando token.                                                       |
+| [`/img/:img`](sections/wellcome#img)                                      | Retorna imagem pelo nome.                                                 |
 
 ---
 
 ## 👤 Perfil
-| Rota                                          | Descrição                                      |
-|-----------------------------------------------|------------------------------------------------|
-| [`/upload-photo-profile`](sections/profile#upload-photo-profile) | Upload da foto de perfil.   |
-| [`/swap-email`](sections/profile#swap-email)  | Alterar e-mail.                                |
-| [`/swap-password`](sections/profile#swap-password) | Alterar senha.                            |
-| [`/game-history`](sections/profile#game-history) | Histórico de partidas do usuário.           |
-| [`/notifications`](sections/profile#notifications) | Notificações do usuário.                  |
-| [`/notification`](sections/profile#notification) | Notificação específica.                     |
+| Rota                                                                      | Descrição                                                                 |
+|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| [`/user/update-image`](sections/profile#/user/update-image)               | Upload da foto de perfil.                                                 |
+| [`/swap-email`](sections/profile#swap-email)                              | Alterar e-mail.                                                           |
+| [`/swap-password`](sections/profile#swap-password)                        | Alterar senha.                                                            |
+| [`/game-history`](sections/profile#game-history)                          | Histórico de partidas do usuário.                                         |
+| [`/notifications`](sections/profile#notifications)                        | Notificações do usuário.                                                  |
+| [`/notification`](sections/profile#notification)                          | Notificação específica.                                                   |
 
 ---
 
 ## 🏠 Home
-| Rota                                           | Descrição                                      |
-|------------------------------------------------|------------------------------------------------|
-| [`/presence-student`](sections/home#presence-student) | Registrar presença do aluno.            |
-| [`/presence-list`](sections/home#presence-list) | Consultar lista de alunos confirmados.        |
+| Rota                                                                      | Descrição                                                                 |
+|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| [`/presence-student`](sections/home#presence-student)                     | Registrar presença do aluno.                                              |
+| [`/presence-list`](sections/home#presence-list)                           | Consultar lista de alunos confirmados.                                    |

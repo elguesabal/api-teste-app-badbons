@@ -76,7 +76,7 @@ HTTP/1.1 200 OK
 ### Parâmetros de Query
 | Parâmetro     | Tipo     | Obrigatório | Descrição                          |
 |---------------|----------|-------------|------------------------------------|
-| `day`         | `string` | Sim         | Dia a ser consultado.              |
+| `date`        | `string` | Sim         | Data a ser consultada.             |
 
 ---
 
@@ -90,7 +90,7 @@ HTTP/1.1 200 OK
 
 ### Exemplo de Requisição
 ```https
-GET /presence-list?day=Sab
+GET /presence-list?date=20/09/2025
 Authorization: Bearer 12345
 ```
 

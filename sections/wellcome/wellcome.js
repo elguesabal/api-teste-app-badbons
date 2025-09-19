@@ -73,13 +73,12 @@ export function register(req, res) {
 	setTimeout(() => res.sendStatus(200), 2000)
 }
 
-// import { credentials } from "./credentials.js";
 import { getLoginToken } from "./login-token.js";
 /**
  * @author VAMPETA
  * @brief ROTA DE LOGIN
  * @method POST
- * @route /login
+ * @route /auth/login
  * @param {string} body.email LOGIN
  * @param {string} body.password SENHA
  * @returns {object} 200 - ENVIA O TOKEN DO USUARIO QUE ELE VAI USAR EM REQUISICOES FUTURAS E MAIS OS DADOS DO CLIENTE
@@ -97,7 +96,7 @@ import { getCredentials } from "./credentials.js";
  * @author VAMPETA
  * @brief ROTA QUE INFORMA AS CREDENCIAIS DO USUARIO
  * @method GET
- * @route /credencitals
+ * @route /auth/credencitals
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @returns {object} 200 - RESPONDE COM AS CREDENCIAIS DO USUARIO
  * @returns 401 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
@@ -113,7 +112,7 @@ export function credentials(req, res) {
  * @author VAMPETA
  * @brief ROTA QUE LOGA USAND O TOKEN
  * @method POST
- * @route /login-token
+ * @route /auth/login-token
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @returns {object} 200 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN AINDA E VALIDO
  * @returns 401 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
