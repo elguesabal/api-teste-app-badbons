@@ -40,8 +40,9 @@ app.get("/game-history", gameHistory);
 app.get("/notifications", notifications);
 app.get("/notification", notification);
 
-import { presenceStudent, presenceList } from "./sections/home/home.js";
+import { presenceStudent, presenceList, exercises } from "./sections/home/home.js";
 app.post("/presence-student", presenceStudent);
 app.get("/presence-list", presenceList);
+app.get("/user/treinos", exercises);
 
 app.listen(process.env.PORT || 3000, () => console.log("Servidor rodando"));

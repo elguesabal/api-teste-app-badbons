@@ -108,3 +108,52 @@ Content-Type: application/json
 	confirmedStudents: ["Slark", "Axe", "Keeper", "Lion", "Anti Mage", "Zeus", "Sniper", "Pudge", "Juggernaut", "Enigma"]
 }
 ```
+
+
+
+---
+---
+---
+---
+---
+
+
+
+### Consulta a lista de alunos confirmados para o treino.
+```https
+  GET /user/treinos
+```
+
+---
+
+### Cabeçalhos (Headers)
+| Parâmetro       | Tipo     | Obrigatório | Descrição                        |
+|-----------------|----------|-------------|----------------------------------|
+| `Authorization` | `string` | Sim         | Token do usuário.                |
+
+---
+
+### Respostas
+| Código | Descrição                                                          |
+|--------|--------------------------------------------------------------------|
+| `200`  | Retorna um objeto com informaçõs dos exercícios.                   |
+| `401`  | Token expirado ou inválido.                                        |
+
+---
+
+### Exemplo de Requisição
+```https
+GET /user/treinos
+Authorization: Bearer 12345
+```
+
+### Exemplo de Resposta (status 200)
+```https
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+	treinosTotais: 10,
+	treinosFeitos: 5
+}
+```

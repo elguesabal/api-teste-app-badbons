@@ -45,3 +45,4 @@ Este repositório documenta todas as rotas da API BadBons, incluindo exemplos de
 |---------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | [`/presence-student`](sections/home#presence-student)                     | Registrar presença do aluno.                                              |
 | [`/presence-list`](sections/home#presence-list)                           | Consultar lista de alunos confirmados.                                    |
+| [`/user/treinos`](sections/home#user/treinos)                             | Consulta o número de exercícios feitos pelo cliente.                      |

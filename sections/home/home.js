@@ -38,3 +38,19 @@ export function presenceList(req, res) {
 	if (newDate.getDay() === 3) res.status(200).json(quinta);
 	if (newDate.getDay() === 5) setTimeout(() => res.status(200).json(sabado), 2000);
 }
+
+/**
+ * @author VAMPETA
+ * @brief ROTA QUE INFORMA A QUANTIDADE DE EXERCICIOS FEITOS
+ * @method GET
+ * @route /user/treinos
+ * @param {string} headers.authorization TOKEN DO USUARIO
+ * @returns {object} 200 - REPONDE COM O NUMERO DE EXERCICIOS TOTAIS E FEITOS
+ * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
+*/
+export function exercises(req, res) {
+	const token = req.headers["authorization"].split(" ")[1];
+
+	if (token !== "12345") return (res.sendStatus(401));
+	setTimeout(() => res.status(200).json({ treinosTotais: 10, treinosFeitos: 5 }), 2000);
+}
