@@ -188,6 +188,13 @@ HTTP/1.1 200 OK
 
 ---
 
+### Parâmetros de Query
+| Parâmetro  | Tipo     | Obrigatório | Descrição                             |
+|------------|----------|-------------|---------------------------------------|
+| `page`     | `string` | Sim         | Número do grupo de partidas.          |
+
+---
+
 ### Respostas
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
@@ -198,7 +205,7 @@ HTTP/1.1 200 OK
 
 ### Exemplo de Requisição
 ```https
-GET /game-history
+GET /game-history?page=1
 Authorization: Bearer 12345
 ```
 
@@ -207,53 +214,59 @@ Authorization: Bearer 12345
 HTTP/1.1 200 OK
 Content-Type: application/json
 
-[
-	{
-		event: "Arco de Shibuya",
-		games: [
-			{
-				title: "Final",
-				favorite: true,
-				player1: { name: "Gojo", points: 21 },
-				player2: { name: "Sukuna", points: 23 }
-			}
-		]
+{
+	pagination: {
+		nextPage: true,
+		totalPages: 2
 	},
-	{
-		event: "BadBons Open 1/2024",
-		games: [
-			{
-				title: "Semi-Final",
-				favorite: false,
-				player1: { name: "Grupo 1", points: 17 },
-				player2: { name: "Grupo 2", points: 5 }
-			},
-			{
-				title: "Quarta de Finais",
-				favorite: false,
-				player1: { name: "Grupo 1", points: 17 },
-				player2: { name: "Grupo 2", points: 5 }
-			}
-		]
-	},
-	{
-		event: "NDB Games 1/2024",
-		games: [
-			{
-				title: "Final",
-				favorite: false,
-				player1: { name: "Grupo 1", points: 17 },
-				player2: { name: "Grupo 2", points: 5 }
-			},
-			{
-				title: "Semi-Final",
-				favorite: false,
-				player1: { name: "Grupo 1", points: 17 },
-				player2: { name: "Grupo 2", points: 5 }
-			}
-		]
-	}
-]
+	data: [
+		{
+			event: "Arco de Shibuya",
+			games: [
+				{
+					title: "Final",
+					favorite: true,
+					player1: { name: "Gojo", points: 21 },
+					player2: { name: "Sukuna", points: 23 }
+				}
+			]
+		},
+		{
+			event: "BadBons Open 1/2024",
+			games: [
+				{
+					title: "Semi-Final",
+					favorite: false,
+					player1: { name: "Grupo 1", points: 17 },
+					player2: { name: "Grupo 2", points: 5 }
+				},
+				{
+					title: "Quarta de Finais",
+					favorite: false,
+					player1: { name: "Grupo 1", points: 17 },
+					player2: { name: "Grupo 2", points: 5 }
+				}
+			]
+		},
+		{
+			event: "NDB Games 1/2024",
+			games: [
+				{
+					title: "Final",
+					favorite: false,
+					player1: { name: "Grupo 1", points: 17 },
+					player2: { name: "Grupo 2", points: 5 }
+				},
+				{
+					title: "Semi-Final",
+					favorite: false,
+					player1: { name: "Grupo 1", points: 17 },
+					player2: { name: "Grupo 2", points: 5 }
+				}
+			]
+		}
+	]
+}
 ```
 
 
@@ -306,113 +319,119 @@ Authorization: Bearer 12345
 HTTP/1.1 200 OK
 Content-Type: application/json
 
-[
-	{
-		id: 1,
-		viewed: false,
-		title: "NDB NEWS",
-		time: "10 min",
-		message: "Quartas de Final - Vencedor Igor Coelho"
+{
+	pagination: {
+		nextPage: true,
+		totalPages: 2
 	},
-	{
-		id: 2,
-		viewed: false,
-		title: "Torneio Amigo",
-		time: "15min",
-		message: "Final - Vencedor Natan Roldão"
-	},
-	{
-		id: 3,
-		viewed: false,
-		title: "Loja BadBons",
-		time: "20min",
-		message: "Camisas Novas já estão liberadas, confira!"
-	},
-	{
-		id: 4,
-		viewed: true,
-		title: "Equipe BadBons",
-		time: "20min",
-		message: "Aula de Reposição para a Tijuca, Dia 10 das 9:00 às 10:00"
-	},
-	{
-		id: 5,
-		viewed: false,
-		title: "NDB NEWS",
-		time: "10 min",
-		message: "Quartas de Final - Vencedor Igor Coelho"
-	},
-	{
-		id: 6,
-		viewed: false,
-		title: "Torneio Amigo",
-		time: "15min",
-		message: "Final - Vencedor Natan Roldão"
-	},
-	{
-		id: 7,
-		viewed: false,
-		title: "Loja BadBons",
-		time: "20min",
-		message: "Camisas Novas já estão liberadas, confira!"
-	},
-	{
-		id: 8,
-		viewed: true,
-		title: "Equipe BadBons",
-		time: "20min",
-		message: "Aula de Reposição para a Tijuca, Dia 10 das 9:00 às 10:00"
-	},
-	{
-		id: 9,
-		viewed: false,
-		title: "NDB NEWS",
-		time: "10 min",
-		message: "Quartas de Final - Vencedor Igor Coelho"
-	},
-	{
-		id: 10,
-		viewed: false,
-		title: "Torneio Amigo",
-		time: "15min",
-		message: "Final - Vencedor Natan Roldão"
-	},
-	{
-		id: 11,
-		viewed: false,
-		title: "Loja BadBons",
-		time: "20min",
-		message: "Camisas Novas já estão liberadas, confira!"
-	},
-	{
-		id: 12,
-		viewed: true,
-		title: "Equipe BadBons",
-		time: "20min",
-		message: "Aula de Reposição para a Tijuca, Dia 10 das 9:00 às 10:00"
-	},
-	{
-		id: 13,
-		viewed: false,
-		title: "NDB NEWS",
-		time: "10 min",
-		message: "Quartas de Final - Vencedor Igor Coelho"
-	},
-	{
-		id: 14,
-		viewed: false,
-		title: "Torneio Amigo",
-		time: "15min",
-		message: "Final - Vencedor Natan Roldão"
-	},
-	{
-		id: 15,
-		viewed: false,
-		title: "Loja BadBons",
-		time: "20min",
-		message: "Camisas Novas já estão liberadas, confira!"
-	}
-]
+	data: [
+		{
+			id: 1,
+			viewed: false,
+			title: "NDB NEWS",
+			time: "10 min",
+			message: "Quartas de Final - Vencedor Igor Coelho"
+		},
+		{
+			id: 2,
+			viewed: false,
+			title: "Torneio Amigo",
+			time: "15min",
+			message: "Final - Vencedor Natan Roldão"
+		},
+		{
+			id: 3,
+			viewed: false,
+			title: "Loja BadBons",
+			time: "20min",
+			message: "Camisas Novas já estão liberadas, confira!"
+		},
+		{
+			id: 4,
+			viewed: true,
+			title: "Equipe BadBons",
+			time: "20min",
+			message: "Aula de Reposição para a Tijuca, Dia 10 das 9:00 às 10:00"
+		},
+		{
+			id: 5,
+			viewed: false,
+			title: "NDB NEWS",
+			time: "10 min",
+			message: "Quartas de Final - Vencedor Igor Coelho"
+		},
+		{
+			id: 6,
+			viewed: false,
+			title: "Torneio Amigo",
+			time: "15min",
+			message: "Final - Vencedor Natan Roldão"
+		},
+		{
+			id: 7,
+			viewed: false,
+			title: "Loja BadBons",
+			time: "20min",
+			message: "Camisas Novas já estão liberadas, confira!"
+		},
+		{
+			id: 8,
+			viewed: true,
+			title: "Equipe BadBons",
+			time: "20min",
+			message: "Aula de Reposição para a Tijuca, Dia 10 das 9:00 às 10:00"
+		},
+		{
+			id: 9,
+			viewed: false,
+			title: "NDB NEWS",
+			time: "10 min",
+			message: "Quartas de Final - Vencedor Igor Coelho"
+		},
+		{
+			id: 10,
+			viewed: false,
+			title: "Torneio Amigo",
+			time: "15min",
+			message: "Final - Vencedor Natan Roldão"
+		},
+		{
+			id: 11,
+			viewed: false,
+			title: "Loja BadBons",
+			time: "20min",
+			message: "Camisas Novas já estão liberadas, confira!"
+		},
+		{
+			id: 12,
+			viewed: true,
+			title: "Equipe BadBons",
+			time: "20min",
+			message: "Aula de Reposição para a Tijuca, Dia 10 das 9:00 às 10:00"
+		},
+		{
+			id: 13,
+			viewed: false,
+			title: "NDB NEWS",
+			time: "10 min",
+			message: "Quartas de Final - Vencedor Igor Coelho"
+		},
+		{
+			id: 14,
+			viewed: false,
+			title: "Torneio Amigo",
+			time: "15min",
+			message: "Final - Vencedor Natan Roldão"
+		},
+		{
+			id: 15,
+			viewed: false,
+			title: "Loja BadBons",
+			time: "20min",
+			message: "Camisas Novas já estão liberadas, confira!"
+		}
+	]
+}
 ```
 
 

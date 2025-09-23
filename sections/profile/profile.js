@@ -60,21 +60,29 @@ export function swapPassword(req, res) {
 	setTimeout(() => res.sendStatus(200), 1000);
 }
 
-import { events } from "./events.js";
+import { events1, events2 } from "./events.js";
 /**
  * @author VAMPETA
  * @brief ROTA QUE RETORNA O HITORICO DE PARTIDA
  * @method GET
  * @route /game-history
  * @param {string} headers.authorization TOKEN DO USUARIO
+ * @param {number} query.page PAGINA DE PARTIDAS (EXEMPLO: A 1° PAGINA CONTEM AS 15 ULTIMAS PARTIDAS E A 2° PAGINA CONTEM AS PARTIDAS 16 ATE A 30)
  * @returns {object} 200 - REPONDE COM O HISTORICO DE PARTIDAS DO USUARIO
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function gameHistory(req, res) {
 	const token = req.headers["authorization"].split(" ")[1];
+	const { page } = req.query;
 
 	if (token !== "12345") return (res.sendStatus(401));
-	setTimeout(() => res.status(200).json(events), 2000);
+	if (page === "1") {
+		setTimeout(() => res.status(200).json(events1), 1000);
+	} else if (page === "2") {
+		setTimeout(() => res.status(200).json(events2), 1000);
+	} else {
+		setTimeout(() => res.status(200).json([]), 1000);
+	}
 }
 
 import { listNotifications1, listNotifications2 } from "./listNotifications.js";
