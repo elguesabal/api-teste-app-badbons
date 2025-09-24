@@ -490,3 +490,68 @@ Content-Type: application/json
 	text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
 }
 ```
+
+
+
+---
+---
+---
+---
+---
+
+
+
+### Rota para atualizar dados do usuário.
+```https
+  PATCH /swap-credentials
+```
+
+---
+
+### Cabeçalhos (Headers)
+| Parâmetro       | Tipo     | Obrigatório | Descrição                        |
+|-----------------|----------|-------------|----------------------------------|
+| `Authorization` | `string` | Sim         | Token do usuário.                |
+
+---
+
+### Parâmetros do Body
+| Parâmetro     | Tipo     | Obrigatório | Descrição                          |
+|---------------|----------|-------------|------------------------------------|
+| `name`        | `string` | Sim         | Nome do usuário.                   |
+| `phone`       | `string` | Sim         | Número de telefone do usuário.     |
+| `cpf`         | `string` | Sim         | Cpf do usuário.                    |
+| `date`        | `string` | Sim         | Data de nascimento do usuário.     |
+| `nationality` | `string` | Sim         | Nacionalidade do usuário.          |
+| `sex`         | `string` | Sim         | Gênero do usuário.                 |
+
+---
+
+### Respostas
+| Código | Descrição                                                          |
+|--------|--------------------------------------------------------------------|
+| `200`  | Dados atualizado com sucesso.                                      |
+| `401`  | Token expirado ou inválido.                                        |
+
+---
+
+### Exemplo de Requisição
+```https
+PATCH /swap-credentials
+Authorization: Bearer 12345
+Content-Type: application/json
+
+{
+	name: "Satoru Gojo",
+	phone: "(00) 00000-0000",
+	cpf: "00000000000",
+	date: "07/12/1989",
+	nationality: "Japão",
+	sex: "Homem"
+}
+```
+
+### Exemplo de Resposta (status 200)
+```https
+HTTP/1.1 200 OK
+```

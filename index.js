@@ -30,7 +30,7 @@ app.get("/auth/credentials", credentials);
 app.post("/auth/login-token", loginToken);
 app.get("/img/:img", img);
 
-import { uploadPhotoProfile, swapEmail, swapPassword, gameHistory, notifications, notification } from "./sections/profile/profile.js";
+import { uploadPhotoProfile, swapEmail, swapPassword, gameHistory, notifications, notification, swapCredentials } from "./sections/profile/profile.js";
 // app.patch("/upload-photo-profile", upload.single("photo"), uploadPhotoProfile); // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
 // app.patch("/upload-photo-profile", uploadPhotoProfile);
 app.patch("/user/update-image", uploadPhotoProfile);
@@ -39,6 +39,7 @@ app.post("/swap-password", swapPassword);
 app.get("/game-history", gameHistory);
 app.get("/notifications", notifications);
 app.get("/notification", notification);
+app.patch("/swap-credentials", swapCredentials);
 
 import { presenceStudent, presenceList, exercises } from "./sections/home/home.js";
 app.post("/presence-student", presenceStudent);

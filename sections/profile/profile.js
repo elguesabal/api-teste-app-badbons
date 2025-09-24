@@ -133,3 +133,26 @@ export function notification(req, res) {
 	if (id === "5") return (res.status(200).json(notification5));
 	setTimeout(() => res.sendStatus(404), 1000);
 }
+
+/**
+ * @author VAMPETA
+ * @brief ROTA QUE TROCA AS CREDENCIAIS DO USUARIO
+ * @method PATCH
+ * @route /swap-credentials
+ * @param {string} headers.authorization TOKEN DO USUARIO
+ * @param {string} body.name NOME DO USUARIO
+ * @param {string} body.phone TELEFONE DO USUARIO
+ * @param {string} body.cpf CPF DO USUARIO
+ * @param {string} body.date DATA DE NASCIMENTO DO USUARIO
+ * @param {string} body.nationality NACIONALIDADE DO USUARIO
+ * @param {string} body.sex SEXO DO USUARIO
+ * @returns {object} 200 - REPONDE APENAS COM STATUS
+ * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
+*/
+export function swapCredentials(req, res) {
+	const token = req.headers["authorization"].split(" ")[1];
+	const { name, phone, cpf, date, nationality, sex } = req.body;
+
+	if (token !== "12345") return (res.sendStatus(401));
+	setTimeout(() => res.sendStatus(200), 1000);
+}
