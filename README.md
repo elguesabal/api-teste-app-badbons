@@ -37,7 +37,7 @@ Este repositório documenta todas as rotas da API BadBons, incluindo exemplos de
 | [`/game-history`](sections/profile#game-history)                          | Histórico de partidas do usuário.                                         |
 | [`/notifications`](sections/profile#notifications)                        | Notificações do usuário.                                                  |
 | [`/notification`](sections/profile#notification)                          | Notificação específica.                                                   |
-| [`/swap-credentials`](sections/profile#swap-credentials)                  | Atualização de dados.                                                    |
+| [`/swap-credentials`](sections/profile#swap-credentials)                  | Atualização de dados.                                                     |
 
 ---
 

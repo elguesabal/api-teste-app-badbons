@@ -250,10 +250,11 @@ HTTP/1.1 200 OK
 ---
 
 ### Parâmetros do Body
-| Parâmetro  | Tipo     | Obrigatório | Descrição                             |
-|------------|----------|-------------|---------------------------------------|
-| `email`    | `string` | Sim         | Login do usuário.                     |
-| `password` | `string` | Sim         | Senha de acesso.                      |
+| Parâmetro            | Tipo     | Obrigatório | Descrição                   |
+|----------------------|----------|-------------|-----------------------------|
+| `email`              | `string` | Sim         | Login do usuário.           |
+| `password`           | `string` | Sim         | Senha de acesso.            |
+| `tokenNotifications` | `string` | Não         | Token de notificação.       |
 
 ---
 

@@ -85,9 +85,10 @@ import { getLoginToken } from "./login-token.js";
  * @returns 401 - MENSAGEM DE ERRO AO TENTAR LOGAR COM LOGIN OU SENHA ERRADA
 */
 export function loginCredentials(req, res) {
-	const { email, password } = req.body;
+	const { email, password, tokenNotifications } = req.body;
 
 	if (email !== "Vampeta" || password !== "123") return (res.sendStatus(401));
+	console.log("token de notificacao: ", tokenNotifications);
 	setTimeout(() => res.status(200).send(getLoginToken()), 1000);
 }
 
