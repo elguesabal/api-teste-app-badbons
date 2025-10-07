@@ -273,7 +273,8 @@ Content-Type: application/json
 
 {
     email: "email@dominio.com",
-    password: "123"
+    password: "123",
+    tokenNotifications: "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]"
 }
 ```
 
