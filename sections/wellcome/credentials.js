@@ -6,7 +6,6 @@ export function getCredentials(req) {
 		cpf: "Cancelado",
 		date: "07/12/1989",
 		phone: "(00) 00000-0000",
-		units: ["Shibuya", "Shinjuku", "Fukutoshin"],
 		times: {
 			Madureira: [
 				{ day: "Quinta", start: "18:00", end: "19:30" },
