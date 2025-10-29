@@ -1,6 +1,4 @@
-export function getLoginToken() {
-	return ({
-		RefreshToken: "12345",
-		accesstoken: "54321"
-	});
-}
+export const getLoginToken = {
+	RefreshToken: "12345",
+	accesstoken: "54321"
+};

@@ -71,14 +71,14 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 [
-    "Barra da Tijuca",
-    "Andaraí",
-    "Madureira",
-    "Bonsucesso",
-    "Tijuca",
-    "Guaratiba",
-    "Lagoa",
-    "Taquara"
+  "Barra da Tijuca",
+  "Andaraí",
+  "Madureira",
+  "Bonsucesso",
+  "Tijuca",
+  "Guaratiba",
+  "Lagoa",
+  "Taquara"
 ]
 ```
 
@@ -211,19 +211,19 @@ POST /register
 Content-Type: application/json
 
 {
-    email: "email@dominio.com",
-    password: "123",
-    cpf: "1234567",
-    date: "01/01/2000",
-    phone: "21 999999999",
-    times: {
-        Madureira: [
-            { day: "Quinta", start: "9:30", end: "11:00" }
-        ],
-        Bonsucesso: [
-            { day: "Quarta", start: "8:00", end: "9:30" }
-        ]
-    }
+  email: "email@dominio.com",
+  password: "123",
+  cpf: "1234567",
+  date: "01/01/2000",
+  phone: "21 999999999",
+  times: {
+    Madureira: [
+      { day: "Quinta", start: "9:30", end: "11:00" }
+    ],
+    Bonsucesso: [
+      { day: "Quarta", start: "8:00", end: "9:30" }
+    ]
+  }
 }
 ```
 
@@ -272,9 +272,9 @@ POST /login
 Content-Type: application/json
 
 {
-    email: "email@dominio.com",
-    password: "123",
-    tokenNotifications: "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]"
+  email: "email@dominio.com",
+  password: "123",
+  tokenNotifications: "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]"
 }
 ```
 
@@ -283,8 +283,8 @@ Content-Type: application/json
 HTTP/1.1 200 OK
 
 {
-		RefreshToken: "12345",
-		accesstoken: "54321"
+  RefreshToken: "12345",
+  accesstoken: "54321"
 }
 ```
 
@@ -326,8 +326,8 @@ GET /credentials
 Content-Type: application/json
 
 {
-    login: "login",
-    password: "123"
+  login: "login",
+  password: "123"
 }
 ```
 
@@ -336,21 +336,22 @@ Content-Type: application/json
 HTTP/1.1 200 OK
 
 {
-    photo: "https://api-teste-app-badbons.vercel.app/img/user.jpg",
-    name: "Satoru Gojo",
-    email: "soladordesukuna@ryomen.com",
-    cpf: "Cancelado",
-    date: "07/12/1989",
-    phone: "(00) 00000-0000",
-    times: {
-        Madureira: [
-            { day: "Quinta", start: "18:00", end: "19:30" },
-            { day: "Sabado", start: "9:00", end: "10:30" }
-        ],
-        Bonsucesso: [
-            { day: "Quarta", start: "18:00", end: "20:00" }
-        ]
-    }
+  _id: "123",
+  foto: "https://api-teste-app-badbons.vercel.app/img/user.jpg",
+  nome: "Satoru Gojo",
+  email: "soladordesukuna@ryomen.com",
+  cpf: "Cancelado",
+  dataNascimento: "07/12/1989",
+  telefone: "(00) 00000-0000",
+  times: {
+    Madureira: [
+      { day: "Quinta", start: "18:00", end: "19:30" },
+      { day: "Sabado", start: "9:00", end: "10:30" }
+    ],
+    Bonsucesso: [
+      { day: "Quarta", start: "18:00", end: "20:00" }
+    ]
+  }
 }
 ```
 

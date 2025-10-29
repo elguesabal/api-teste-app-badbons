@@ -1,11 +1,12 @@
 export function getCredentials(req) {
 	return ({
-		photo: `${(req.headers["x-forwarded-proto"] || req.protocol).includes("https") ? "https" : "http"}://${req.get("host")}/img/user.jpg`,
-		name: "Satoru Gojo",
+		_id: "123",
+		foto: `${(req.headers["x-forwarded-proto"] || req.protocol).includes("https") ? "https" : "http"}://${req.get("host")}/img/user.jpg`,
+		nome: "Satoru Gojo",
 		email: "soladordesukuna@ryomen.com",
 		cpf: "Cancelado",
-		date: "07/12/1989",
-		phone: "(00) 00000-0000",
+		dataNascimento: "07/12/1989",
+		telefone: "(00) 00000-0000",
 		times: {
 			Madureira: [
 				{ day: "Quinta", start: "18:00", end: "19:30" },

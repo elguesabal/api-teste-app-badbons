@@ -89,7 +89,7 @@ export function loginCredentials(req, res) {
 
 	if (email !== "Vampeta" || password !== "123") return (res.sendStatus(401));
 	console.log("token de notificacao: ", tokenNotifications);
-	setTimeout(() => res.status(200).send(getLoginToken()), 1000);
+	setTimeout(() => res.status(200).send(getLoginToken), 1000);
 }
 
 import { getCredentials } from "./credentials.js";

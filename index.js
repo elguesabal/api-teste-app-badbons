@@ -23,16 +23,13 @@ app.get("/ping", ping);
 app.get("/training-locations", trainingLocations);
 app.get("/timetable-units", timetableUnits);
 app.post("/register", register);
-// app.post("/login", loginCredentials);
 app.post("/auth/login", loginCredentials);
-app.get("/auth/credentials", credentials);
-// app.post("/login-token", loginToken);
+app.get("/credentials", credentials);
 app.post("/auth/login-token", loginToken);
 app.get("/img/:img", img);
 
 import { uploadPhotoProfile, swapEmail, swapPassword, gameHistory, notifications, notification, swapCredentials } from "./sections/profile/profile.js";
 // app.patch("/upload-photo-profile", upload.single("photo"), uploadPhotoProfile); // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
-// app.patch("/upload-photo-profile", uploadPhotoProfile);
 app.patch("/user/update-image", uploadPhotoProfile);
 app.post("/swap-email", swapEmail);
 app.post("/swap-password", swapPassword);
