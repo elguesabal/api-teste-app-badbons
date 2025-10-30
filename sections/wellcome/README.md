@@ -22,6 +22,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 | Código | Descrição                                                           |
 |--------|---------------------------------------------------------------------|
 | `200`  | O servidor está acessível e a versão do app é compatível com a API. |
+| `400`  | O servidor está acessível, mas a versão do app não foi informada.   |
 | `426`  | O servidor está acessível, mas a versão do app é incompatível.      |
 
 ---
@@ -262,7 +263,8 @@ HTTP/1.1 200 OK
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
 | `200`  | Login bem-sucedido.                                                |
-| `401`  | Senha ou login inválidos.                                          |
+| `400`  | Login ou senha não informado.                                      |
+| `401`  | Login ou senha inválidos.                                          |
 
 ---
 

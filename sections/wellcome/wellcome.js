@@ -14,6 +14,7 @@ import { versions } from "./versions.js";
 export function ping(req, res) {
 	const { version } = req.query;
 
+	if (!version) return (res.sendStatus(400));
 	setTimeout(() => res.sendStatus((versions.includes(version)) ? 200 : 426), 2000);
 }
 
@@ -85,10 +86,12 @@ import { getLoginToken } from "./login-token.js";
  * @returns 401 - MENSAGEM DE ERRO AO TENTAR LOGAR COM LOGIN OU SENHA ERRADA
 */
 export function loginCredentials(req, res) {
+	if (!req.body) return (res.sendStatus(400));
 	const { email, password, tokenNotifications } = req.body;
 
+	if (!email || !password) return (res.sendStatus(400));
 	if (email !== "Vampeta" || password !== "123") return (res.sendStatus(401));
-	console.log("token de notificacao: ", tokenNotifications);
+	console.log("token de notificacao: ", tokenNotifications); // DEVERIA VERIFICAR SE O TOKEN E VALIDO E RETORNAR ERRO?
 	setTimeout(() => res.status(200).send(getLoginToken), 1000);
 }
 
