@@ -21,7 +21,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 ### Respostas
 | Código | Descrição                                                           |
 |--------|---------------------------------------------------------------------|
-| `200`  | O servidor está acessível e a versão do app é compatível com a API. |
+| `204`  | O servidor está acessível e a versão do app é compatível com a API. |
 | `400`  | O servidor está acessível, mas a versão do app não foi informada.   |
 | `426`  | O servidor está acessível, mas a versão do app é incompatível.      |
 
@@ -263,6 +263,7 @@ HTTP/1.1 200 OK
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
 | `200`  | Login bem-sucedido.                                                |
+| `207`  | Login bem-sucedido porém o token Expo de notificação é inválido.   |
 | `400`  | Login ou senha não informado.                                      |
 | `401`  | Login ou senha inválidos.                                          |
 
@@ -286,7 +287,8 @@ HTTP/1.1 200 OK
 
 {
   RefreshToken: "12345",
-  accesstoken: "54321"
+  accesstoken: "54321",
+  validToken: true
 }
 ```
 

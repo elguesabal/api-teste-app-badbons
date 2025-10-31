@@ -2,10 +2,12 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 // import multer from "multer"; // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
+import axios from "axios";
 
 const app = express();
 app.use(express.json());
 app.use("/img", express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), "img")));
+axios.defaults.validateStatus = () => true;
 
 // const storage = multer.diskStorage({ // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
 // 	destination: (req, file, cb) => {
