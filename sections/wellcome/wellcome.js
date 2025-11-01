@@ -97,7 +97,7 @@ export async function loginCredentials(req, res) {
 		const result = await axios.post("https://exp.host/--/api/v2/push/send", { to: tokenNotifications });
 		if (result.status !== 200) return (res.status(207).send(getLoginToken(false)));
 	}
-	setTimeout(() => res.status(200).send(getLoginToken(true)), 1000);
+	setTimeout(() => res.status(200).send(getLoginToken((tokenNotifications) ? true : false)), 1000);
 }
 
 import { getCredentials } from "./credentials.js";
