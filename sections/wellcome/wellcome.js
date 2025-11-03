@@ -95,7 +95,7 @@ export async function loginCredentials(req, res) {
 	console.log("token de notificacao: ", tokenNotifications);
 	if (tokenNotifications) {
 		const result = await axios.post("https://exp.host/--/api/v2/push/send", { to: tokenNotifications });
-		if (result.status !== 200) return (res.status(207).send(getLoginToken(false)));
+		if (result.status !== 200 || result.data.data.status === "error") return (res.status(207).send(getLoginToken(false)));
 	}
 	setTimeout(() => res.status(200).send(getLoginToken((tokenNotifications) ? true : false)), 1000);
 }
