@@ -10,6 +10,7 @@ import { versions } from "./versions.js";
  * @route /ping
  * @param {string} query.version VERSAO DO APP
  * @returns 200 - RESPONDE APENAS COM O STATUS SE A API FOR COMPATIVEL
+ * @returns 400 - RESPONDE APENAS COM O STATUS SE 'version' NAO FOR ENVIADO
  * @returns 426 - RESPONDE APENAS COM O STATUS SE A API NAO FOR COMPATIVEL
 */
 export function ping(req, res) {
@@ -83,7 +84,9 @@ import { getLoginToken } from "./login-token.js";
  * @route /auth/login
  * @param {string} body.email LOGIN
  * @param {string} body.password SENHA
- * @returns {object} 200 - ENVIA O TOKEN DO USUARIO QUE ELE VAI USAR EM REQUISICOES FUTURAS E MAIS OS DADOS DO CLIENTE
+ * @returns {object} 200 - ENVIA O TOKEN DO USUARIO QUE ELE VAI USAR EM REQUISICOES FUTURAS
+ * @returns {object} 207 - ENVIA O TOKEN DO USUARIO QUE ELE VAI USAR EM REQUISICOES FUTURAS POREM INFORMANDO QUE O TOKEN EXPO DE NOTIFICACAO RECEBIDO E INVALIDO
+ * @returns 400 - RETORNA APENAS O STATUS SE 'email' OU 'password' NAO FOREM ENVIADOS
  * @returns 401 - MENSAGEM DE ERRO AO TENTAR LOGAR COM LOGIN OU SENHA ERRADA
 */
 export async function loginCredentials(req, res) {
