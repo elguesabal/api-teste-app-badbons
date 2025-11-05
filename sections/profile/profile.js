@@ -21,12 +21,12 @@ export function uploadPhotoProfile(req, res) {
 /**
  * @author VAMPETA
  * @brief ROTA QUE TROCA O EMAIL DO USUARIO
- * @method POST
+ * @method PATCH
  * @route /swap-email
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @param {string} body.newEmail NOVO EMAIL
  * @param {string} body.password SENHA
- * @returns 200 - RESPONDE APENAS COM O STATUS
+ * @returns 204 - RESPONDE APENAS COM O STATUS
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
  * @returns 403 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR VALIDO MAS A SENHA INFORMADA ESTEJA ERRADA
 */
@@ -36,7 +36,7 @@ export function swapEmail(req, res) {
 
 	if (token !== "12345") return (res.sendStatus(401));
 	if (password !== "123") return (res.sendStatus(403));
-	setTimeout(() => res.sendStatus(200), 1000);
+	setTimeout(() => res.sendStatus(204), 1000);
 }
 
 /**

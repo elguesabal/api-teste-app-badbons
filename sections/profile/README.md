@@ -60,7 +60,7 @@ HTTP/1.1 200 OK
 
 ### Rota para trocar o e-mail do usuário.
 ```https
-  POST /swap-email
+  PATCH /swap-email
 ```
 
 ---
@@ -83,7 +83,7 @@ HTTP/1.1 200 OK
 ### Respostas
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
-| `200`  | E-mail trocado com sucesso.                                        |
+| `204`  | E-mail trocado com sucesso.                                        |
 | `401`  | Token expirado ou inválido.                                        |
 | `403`  | Token válido mas senha incorreta.                                  |
 
@@ -91,7 +91,7 @@ HTTP/1.1 200 OK
 
 ### Exemplo de Requisição
 ```https
-POST /swap-email
+PATCH /swap-email
 Authorization: Bearer 12345
 Content-Type: application/json
 
@@ -101,9 +101,9 @@ Content-Type: application/json
 }
 ```
 
-### Exemplo de Resposta (status 200)
+### Exemplo de Resposta (status 204)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 204 OK
 ```
 
 

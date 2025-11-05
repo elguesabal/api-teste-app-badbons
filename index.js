@@ -33,7 +33,7 @@ app.get("/img/:img", img);
 import { uploadPhotoProfile, swapEmail, swapPassword, gameHistory, notifications, notification, swapCredentials } from "./sections/profile/profile.js";
 // app.patch("/upload-photo-profile", upload.single("photo"), uploadPhotoProfile); // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
 app.patch("/user/update-image", uploadPhotoProfile);
-app.post("/swap-email", swapEmail);
+app.patch("/swap-email", swapEmail);
 app.post("/swap-password", swapPassword);
 app.get("/game-history", gameHistory);
 app.get("/notifications", notifications);

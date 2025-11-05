@@ -50,9 +50,9 @@ export function presenceList(req, res) {
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function exercises(req, res) {
-	if (!req.headers.authorization) return (res.sendStatus(400));
-	const token = req.headers["authorization"].split(" ")[1];
+	const authorization = req.headers.authorization?.split(" ");
 
-	if (token !== "12345") return (res.sendStatus(401));
+	if (!authorization || authorization[0] !== "Bearer") return (res.sendStatus(400));
+	if (authorization[1] !== "12345") return (res.sendStatus(401));
 	setTimeout(() => res.status(200).json({ treinosTotais: 10, treinosFeitos: 5 }), 2000);
 }

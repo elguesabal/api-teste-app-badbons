@@ -137,6 +137,7 @@ Content-Type: application/json
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
 | `200`  | Retorna um objeto com informaçõs dos exercícios.                   |
+| `400`  | Token não enviado.                                                 |
 | `401`  | Token expirado ou inválido.                                        |
 
 ---
