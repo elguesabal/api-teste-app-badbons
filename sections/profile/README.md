@@ -84,7 +84,8 @@ HTTP/1.1 200 OK
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
 | `204`  | E-mail trocado com sucesso.                                        |
-| `401`  | Token expirado ou inválido.                                        |
+| `400`  | Novo e-mail ou senha não enviados.                                 |
+| `401`  | Token expirado, inválido ou não enviado.                           |
 | `403`  | Token válido mas senha incorreta.                                  |
 
 ---

@@ -46,13 +46,11 @@ export function presenceList(req, res) {
  * @route /user/treinos
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @returns {object} 200 - REPONDE COM O NUMERO DE EXERCICIOS TOTAIS E FEITOS
- * @returns 400 - REPONDE APENAS COM O STATUS SE O TOKEN NAO FOR ENVIADO
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function exercises(req, res) {
-	const authorization = req.headers.authorization?.split(" ");
+	const { authorization } = req.headers;
 
-	if (!authorization || authorization[0] !== "Bearer") return (res.sendStatus(400));
-	if (authorization[1] !== "12345") return (res.sendStatus(401));
+	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 	setTimeout(() => res.status(200).json({ treinosTotais: 10, treinosFeitos: 5 }), 2000);
 }
