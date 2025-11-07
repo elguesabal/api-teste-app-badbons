@@ -47,4 +47,15 @@ app.post("/presence-student", presenceStudent);
 app.get("/presence-list", presenceList);
 app.get("/user/treinos", exercises);
 
+
+app.post("/test", (req, res) => {
+    const bodyTest = req.body?.test;
+    const queryTest = req.params.test;
+    const headersTest = req.headers.test;
+
+    if (!bodyTest) return (res.sendStatus(400));
+    res.sendStatus(204);
+});
+
+
 app.listen(process.env.PORT || 3000, () => console.log("Servidor rodando"));
