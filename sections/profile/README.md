@@ -87,6 +87,7 @@ HTTP/1.1 200 OK
 | `400`  | Novo e-mail ou senha não enviados.                                 |
 | `401`  | Token expirado, inválido ou não enviado.                           |
 | `403`  | Token válido mas senha incorreta.                                  |
+| `409`  | O antigo e-mail é repassado no campo de novo e-mail ou outro usuário já utiliza esse e-mail. |
 
 ---
 
