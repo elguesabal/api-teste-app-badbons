@@ -34,9 +34,10 @@ export function uploadPhotoProfile(req, res) {
 */
 export function swapEmail(req, res) {
 	const { authorization } = req.headers;
-	const { newEmail, password } = req.body;
-
 	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
+
+	if (!req.body) return (res.sendStatus(400));
+	const { newEmail, password } = req.body;
 	if (!newEmail || !password) return (res.sendStatus(400));
 	if (password !== process.env.PASSWORD) return (res.sendStatus(403));
 	if (newEmail === process.env.EMAIL || newEmail === "email-em-uso@domino.com") return (res.sendStatus(409));
@@ -46,12 +47,12 @@ export function swapEmail(req, res) {
 /**
  * @author VAMPETA
  * @brief ROTA QUE TROCA A SENHA DO USUARIO
- * @method POST
+ * @method PATCH
  * @route /swap-password
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @param {string} body.newPassword NOVA SENHA
  * @param {string} body.password SENHA
- * @returns 200 - RESPONDE APENAS COM O STATUS
+ * @returns 204 - RESPONDE APENAS COM O STATUS
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
  * @returns 403 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR VALIDO MAS A SENHA INFORMADA ESTEJA ERRADA
 */
@@ -61,7 +62,7 @@ export function swapPassword(req, res) {
 
 	if (token !== "12345") return (res.sendStatus(401));
 	if (password !== "123") return (res.sendStatus(403));
-	setTimeout(() => res.sendStatus(200), 1000);
+	setTimeout(() => res.sendStatus(204), 1000);
 }
 
 import { events1, events2 } from "./events.js";

@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use("/img", express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), "img")));
 axios.defaults.validateStatus = () => true;
-dotenv.config();
+dotenv.config({ quiet: true });
 
 // const storage = multer.diskStorage({ // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
 // 	destination: (req, file, cb) => {
@@ -36,7 +36,7 @@ import { uploadPhotoProfile, swapEmail, swapPassword, gameHistory, notifications
 // app.patch("/upload-photo-profile", upload.single("photo"), uploadPhotoProfile); // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
 app.patch("/user/update-image", uploadPhotoProfile);
 app.patch("/swap-email", swapEmail);
-app.post("/swap-password", swapPassword);
+app.patch("/swap-password", swapPassword);
 app.get("/game-history", gameHistory);
 app.get("/notifications", notifications);
 app.get("/notification", notification);
@@ -49,11 +49,11 @@ app.get("/user/treinos", exercises);
 
 
 app.post("/test", (req, res) => {
-    const bodyTest = req.body?.test;
-    const queryTest = req.params.test;
-    const headersTest = req.headers.test;
+    console.log("Headers: ", req.headers);
+    console.log("Query: ", req.query);
+    console.log("Body", req.body);
+    console.log("\n\n\n");
 
-    if (!bodyTest) return (res.sendStatus(400));
     res.sendStatus(204);
 });
 

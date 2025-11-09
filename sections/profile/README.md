@@ -120,7 +120,7 @@ HTTP/1.1 204 OK
 
 ### Rota para trocar a senha do usuário.
 ```https
-  POST /swap-password
+  PATCH /swap-password
 ```
 
 ---
@@ -143,7 +143,7 @@ HTTP/1.1 204 OK
 ### Respostas
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
-| `200`  | Senha trocada com sucesso.                                         |
+| `204`  | Senha trocada com sucesso.                                         |
 | `401`  | Token expirado ou inválido.                                        |
 | `403`  | Token válido mas senha incorreta.                                  |
 
@@ -151,7 +151,7 @@ HTTP/1.1 204 OK
 
 ### Exemplo de Requisição
 ```https
-POST /swap-password
+PATCH /swap-password
 Authorization: Bearer 12345
 Content-Type: application/json
 
