@@ -84,7 +84,7 @@ HTTP/1.1 200 OK
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
 | `204`  | E-mail trocado com sucesso.                                        |
-| `400`  | Novo e-mail ou senha não enviados.                                 |
+| `400`  | Novo e-mail ou senha não enviados ou e-mail inválido.              |
 | `401`  | Token expirado, inválido ou não enviado.                           |
 | `403`  | Token válido mas senha incorreta.                                  |
 | `409`  | O antigo e-mail é repassado no campo de novo e-mail ou outro usuário já utiliza esse e-mail. |
@@ -144,8 +144,10 @@ HTTP/1.1 204 OK
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
 | `204`  | Senha trocada com sucesso.                                         |
+| `400`  | Nova senha ou senha ausente ou a nova senha não atende as requisitos. |
 | `401`  | Token expirado ou inválido.                                        |
 | `403`  | Token válido mas senha incorreta.                                  |
+| `409`  | Nova senha igual a atual.                                          |
 
 ---
 

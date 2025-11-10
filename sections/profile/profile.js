@@ -1,3 +1,5 @@
+import validator from "validator";
+
 /**
  * @author VAMPETA
  * @brief ROTA QUE SALVA A NOVA FOTO DE PERFIL DO CLIENTE
@@ -27,7 +29,7 @@ export function uploadPhotoProfile(req, res) {
  * @param {string} body.newEmail NOVO EMAIL
  * @param {string} body.password SENHA
  * @returns 204 - RESPONDE APENAS COM O STATUS
- * @returns 400 - RESPONDE APENAS COM O STATUS O NOVO EMAIL OU SENHA NAO FOREM ENVIADOS
+ * @returns 400 - RESPONDE APENAS COM O STATUS SE O NOVO EMAIL OU SENHA NAO FOREM ENVIADOS OU EMAIL INVALIDO
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO OU NAO FOR ENVIADO
  * @returns 403 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR VALIDO MAS A SENHA INFORMADA ESTEJA ERRADA
  * @returns 409 - RESPONDE APENAS COM O STATUS SE O NOVO EMAIL FOR O MESMO QUE O ANTIGO OU ESTIVER SENDO USADO POR OUTRO USUARIO
@@ -40,6 +42,7 @@ export function swapEmail(req, res) {
 	const { newEmail, password } = req.body;
 	if (!newEmail || !password) return (res.sendStatus(400));
 	if (password !== process.env.PASSWORD) return (res.sendStatus(403));
+	if (!validator.isEmail(newEmail)) return (res.sendStatus(400));
 	if (newEmail === process.env.EMAIL || newEmail === "email-em-uso@domino.com") return (res.sendStatus(409));
 	setTimeout(() => res.sendStatus(204), 1000);
 }
@@ -53,15 +56,20 @@ export function swapEmail(req, res) {
  * @param {string} body.newPassword NOVA SENHA
  * @param {string} body.password SENHA
  * @returns 204 - RESPONDE APENAS COM O STATUS
+ * @returns 400 - RESPONDE APENAS COM O STATUS SE A NOVA SENHA OU SENHA NAO FOREM ENVIADOS OU SENHA NAO ATENDE OS REQUISITOS MINIMOS
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
  * @returns 403 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR VALIDO MAS A SENHA INFORMADA ESTEJA ERRADA
+ * @returns 409 - RESPONDE APENAS COM O STATUS SE A NOVA SENHA FOR IGUAL A ATUAL
 */
 export function swapPassword(req, res) {
-	const token = req.headers["authorization"].split(" ")[1];
-	const { newPassword, password } = req.body;
+	const { authorization } = req.headers;
+	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
-	if (token !== "12345") return (res.sendStatus(401));
-	if (password !== "123") return (res.sendStatus(403));
+	if (!req.body) return (res.sendStatus(400));
+	const { newPassword, password } = req.body;
+	if (!newPassword || !password) return (res.sendStatus(400));
+	if (password !== process.env.PASSWORD) return (res.sendStatus(403));
+	if (newPassword === process.env.PASSWORD) return (res.sendStatus(409));
 	setTimeout(() => res.sendStatus(204), 1000);
 }
 
