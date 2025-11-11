@@ -148,6 +148,7 @@ HTTP/1.1 204 OK
 | `401`  | Token expirado ou inválido.                                        |
 | `403`  | Token válido mas senha incorreta.                                  |
 | `409`  | Nova senha igual a atual.                                          |
+| `422`  | Nova senha não atende aos requisitos mínimos.                      |
 
 ---
 

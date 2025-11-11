@@ -60,6 +60,7 @@ export function swapEmail(req, res) {
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
  * @returns 403 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR VALIDO MAS A SENHA INFORMADA ESTEJA ERRADA
  * @returns 409 - RESPONDE APENAS COM O STATUS SE A NOVA SENHA FOR IGUAL A ATUAL
+ * @returns 422 - RESPONDE APENAS COM O STATUS SE A NOVA SENHA NAO ATENDE AOS REQUISITOS MINIMOS
 */
 export function swapPassword(req, res) {
 	const { authorization } = req.headers;
@@ -70,6 +71,7 @@ export function swapPassword(req, res) {
 	if (!newPassword || !password) return (res.sendStatus(400));
 	if (password !== process.env.PASSWORD) return (res.sendStatus(403));
 	if (newPassword === process.env.PASSWORD) return (res.sendStatus(409));
+	if (newPassword.length < 5 || !/[a-zA-Z]/.test(newPassword) || !/\d/.test(newPassword)) return (res.sendStatus(422));
 	setTimeout(() => res.sendStatus(204), 1000);
 }
 
