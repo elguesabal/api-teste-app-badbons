@@ -9,7 +9,7 @@ import { versions } from "./versions.js";
  * @method GET
  * @route /ping
  * @param {string} query.version VERSAO DO APP
- * @returns 200 - RESPONDE APENAS COM O STATUS SE A API FOR COMPATIVEL
+ * @returns 204 - RESPONDE APENAS COM O STATUS SE A API FOR COMPATIVEL
  * @returns 400 - RESPONDE APENAS COM O STATUS SE 'version' NAO FOR ENVIADO
  * @returns 426 - RESPONDE APENAS COM O STATUS SE A API NAO FOR COMPATIVEL
 */
@@ -126,14 +126,14 @@ export function credentials(req, res) {
  * @method POST
  * @route /auth/login-token
  * @param {string} headers.authorization TOKEN DO USUARIO
- * @returns {object} 200 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN AINDA E VALIDO
+ * @returns {object} 204 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN AINDA E VALIDO
  * @returns 401 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
 */
 export function loginToken(req, res) {
-	const token = req.headers["authorization"].split(" ")[1];
+	const { authorization } = req.headers;
 
-	if (token !== "12345") return (res.sendStatus(401));
-	setTimeout(() => res.sendStatus(200), 1000);
+	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
+	setTimeout(() => res.sendStatus(204), 1000);
 }
 
 /**

@@ -386,7 +386,7 @@ HTTP/1.1 200 OK
 ### Respostas
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
-| `200`  | Login bem-sucedido.                                                |
+| `204`  | Login bem-sucedido.                                                |
 | `401`  | Token expirado ou inválido.                                        |
 
 ---
