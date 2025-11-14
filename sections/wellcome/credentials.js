@@ -5,6 +5,7 @@ export function getCredentials(req) {
 		nome: "Satoru Gojo",
 		email: "soladordesukuna@ryomen.com",
 		cpf: "Cancelado",
+		// cpf: "070.680.938-68",
 		dataNascimento: "07/12/1989",
 		telefone: "(00) 00000-0000",
 		times: {

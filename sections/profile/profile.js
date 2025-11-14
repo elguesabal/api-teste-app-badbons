@@ -1,4 +1,6 @@
-import validator from "validator";
+import * as emailValidator from "validator";
+import { cpf as cpfValidator } from "cpf-cnpj-validator";;
+import { parsePhoneNumberFromString as phoneValidator } from "libphonenumber-js";
 
 /**
  * @author VAMPETA
@@ -42,7 +44,7 @@ export function swapEmail(req, res) {
 	const { newEmail, password } = req.body;
 	if (!newEmail || !password) return (res.sendStatus(400));
 	if (password !== process.env.PASSWORD) return (res.sendStatus(403));
-	if (!validator.isEmail(newEmail)) return (res.sendStatus(400));
+	if (!emailValidator.isEmail(newEmail)) return (res.sendStatus(400));
 	if (newEmail === process.env.EMAIL || newEmail === "email-em-uso@dominio.com") return (res.sendStatus(409));
 	setTimeout(() => res.sendStatus(204), 1000);
 }
@@ -161,13 +163,18 @@ export function notification(req, res) {
  * @param {string} body.date DATA DE NASCIMENTO DO USUARIO
  * @param {string} body.nationality NACIONALIDADE DO USUARIO
  * @param {string} body.sex SEXO DO USUARIO
- * @returns {object} 200 - REPONDE APENAS COM STATUS
+ * @returns 204 - REPONDE APENAS COM STATUS EM CASO DE SUCESSO
+ * @returns 400 - RESPONDE APENAS COM O STATUS SE ALGUM DOS CAMPOS NAO FOREM ENVIADOS OU ALGUM CAMPO INVALIDO
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function swapCredentials(req, res) {
-	const token = req.headers["authorization"].split(" ")[1];
-	const { name, phone, cpf, date, nationality, sex } = req.body;
+	const { authorization } = req.headers;
+	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
-	if (token !== "12345") return (res.sendStatus(401));
-	setTimeout(() => res.sendStatus(200), 1000);
+	if (!req.body) return (res.sendStatus(400));
+	const { name, phone, cpf, date, nationality, sex } = req.body;
+	if (!name || !phone || !cpf || !date || !nationality || !sex) return (res.sendStatus(400));
+	// if (!phoneValidator(phone).isValid()) return (res.sendStatus(400)); // PAREI AKI
+	if (!cpfValidator.isValid(cpf)) return (res.sendStatus(400));
+	setTimeout(() => res.sendStatus(204), 1000);
 }

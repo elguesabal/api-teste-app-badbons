@@ -535,7 +535,8 @@ Content-Type: application/json
 ### Respostas
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
-| `200`  | Dados atualizado com sucesso.                                      |
+| `204`  | Dados atualizado com sucesso.                                      |
+| `400`  | Algum campo do body ausente ou algum campo inválido.               |
 | `401`  | Token expirado ou inválido.                                        |
 
 ---
