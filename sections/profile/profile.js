@@ -174,7 +174,7 @@ export function swapCredentials(req, res) {
 	if (!req.body) return (res.sendStatus(400));
 	const { name, phone, cpf, date, nationality, sex } = req.body;
 	if (!name || !phone || !cpf || !date || !nationality || !sex) return (res.sendStatus(400));
-	// if (!phoneValidator(phone).isValid()) return (res.sendStatus(400)); // PAREI AKI
+	if (!phoneValidator(phone)?.isValid()) return (res.sendStatus(400));
 	if (!cpfValidator.isValid(cpf)) return (res.sendStatus(400));
 	setTimeout(() => res.sendStatus(204), 1000);
 }
