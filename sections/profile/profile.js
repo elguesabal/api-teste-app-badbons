@@ -1,5 +1,5 @@
-import * as emailValidator from "validator";
-import { cpf as cpfValidator } from "cpf-cnpj-validator";;
+import validator from "validator";
+import { cpf as cpfValidator } from "cpf-cnpj-validator";
 import { parsePhoneNumberFromString as phoneValidator } from "libphonenumber-js";
 
 /**
@@ -44,7 +44,9 @@ export function swapEmail(req, res) {
 	const { newEmail, password } = req.body;
 	if (!newEmail || !password) return (res.sendStatus(400));
 	if (password !== process.env.PASSWORD) return (res.sendStatus(403));
-	if (!emailValidator.isEmail(newEmail)) return (res.sendStatus(400));
+	// console.log(emailValidator.isEmail(newEmail))
+	// if (!emailValidator.isEmail(newEmail)) return (res.sendStatus(400));
+	if (!validator.isEmail(newEmail)) return (res.sendStatus(400));
 	if (newEmail === process.env.EMAIL || newEmail === "email-em-uso@dominio.com") return (res.sendStatus(409));
 	setTimeout(() => res.sendStatus(204), 1000);
 }
@@ -173,8 +175,9 @@ export function swapCredentials(req, res) {
 
 	if (!req.body) return (res.sendStatus(400));
 	const { name, phone, cpf, date, nationality, sex } = req.body;
-	if (!name || !phone || !cpf || !date || !nationality || !sex) return (res.sendStatus(400));
+	if (!name || typeof name !== "string" || !phone || typeof phone !== "string" || typeof cpf !== "string" || !cpf || typeof date !== "string" || !date || typeof nationality !== "string" || !nationality || typeof sex !== "string" || !sex) return (res.sendStatus(400));
 	if (!phoneValidator(phone)?.isValid()) return (res.sendStatus(400));
 	if (!cpfValidator.isValid(cpf)) return (res.sendStatus(400));
+	if (!validator.isDate(date, { format: "DD/MM/YYYY", strictMode: true })) return (res.sendStatus(400));
 	setTimeout(() => res.sendStatus(204), 1000);
 }
