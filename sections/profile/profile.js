@@ -42,10 +42,8 @@ export function swapEmail(req, res) {
 
 	if (!req.body) return (res.sendStatus(400));
 	const { newEmail, password } = req.body;
-	if (!newEmail || !password) return (res.sendStatus(400));
+	if (!newEmail || typeof newEmail !== "string" || !password || typeof password !== "string") return (res.sendStatus(400));
 	if (password !== process.env.PASSWORD) return (res.sendStatus(403));
-	// console.log(emailValidator.isEmail(newEmail))
-	// if (!emailValidator.isEmail(newEmail)) return (res.sendStatus(400));
 	if (!validator.isEmail(newEmail)) return (res.sendStatus(400));
 	if (newEmail === process.env.EMAIL || newEmail === "email-em-uso@dominio.com") return (res.sendStatus(409));
 	setTimeout(() => res.sendStatus(204), 1000);

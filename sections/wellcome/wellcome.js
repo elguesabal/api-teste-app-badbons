@@ -93,14 +93,15 @@ export async function loginCredentials(req, res) {
 	if (!req.body) return (res.sendStatus(400));
 	const { email, password, tokenNotifications } = req.body;
 
-	if (!email || !password) return (res.sendStatus(400));
-	if ((email !== process.env.EMAIL && email != "Vampeta") || password !== "123") return (res.sendStatus(401));
+	if (!email || typeof email !== "string" || typeof password !== "string" || !password) return (res.sendStatus(400));
+	if ((email !== process.env.EMAIL && email !== "Vampeta") || password !== "123") return (res.sendStatus(401));
+	if (typeof tokenNotifications === "undefined") console.log("undefined")
+	if (tokenNotifications === undefined) return (res.status(200).send(getLoginToken(false)));
+	if (!tokenNotifications || typeof tokenNotifications !== "string") return (res.status(207).send(getLoginToken(false)));
+	const result = await axios.post("https://exp.host/--/api/v2/push/send", { to: tokenNotifications });
+	if (result.status !== 200 || result.data.data.status === "error") return (res.status(207).send(getLoginToken(false)));
 	console.log("token de notificacao: ", tokenNotifications);
-	if (tokenNotifications) {
-		const result = await axios.post("https://exp.host/--/api/v2/push/send", { to: tokenNotifications });
-		if (result.status !== 200 || result.data.data.status === "error") return (res.status(207).send(getLoginToken(false)));
-	}
-	setTimeout(() => res.status(200).send(getLoginToken((tokenNotifications) ? true : false)), 1000);
+	setTimeout(() => res.status(200).send(getLoginToken((typeof tokenNotifications === "string") ? true : false)), 1000);
 }
 
 import { getCredentials } from "./credentials.js";
