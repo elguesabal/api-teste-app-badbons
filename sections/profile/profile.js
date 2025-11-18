@@ -70,7 +70,7 @@ export function swapPassword(req, res) {
 
 	if (!req.body) return (res.sendStatus(400));
 	const { newPassword, password } = req.body;
-	if (!newPassword || !password) return (res.sendStatus(400));
+	if (!newPassword || typeof newPassword !== "string" || !password || typeof password !== "string") return (res.sendStatus(400));
 	if (password !== process.env.PASSWORD) return (res.sendStatus(403));
 	if (newPassword === process.env.PASSWORD) return (res.sendStatus(409));
 	if (newPassword.length < 5 || !/[a-zA-Z]/.test(newPassword) || !/\d/.test(newPassword)) return (res.sendStatus(422));
@@ -130,25 +130,28 @@ export function notifications(req, res) {
 import { notification1, notification2, notification3, notification4, notification5 } from "./notification.js";
 /**
  * @author VAMPETA
- * @brief ROTA QUE BUSCA UMA NOTIFICACAO EXPECIFICA
+ * @brief ROTA QUE BUSCA UMA NOTIFICACAO ESPECIFICA
  * @method GET
  * @route /notification
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @param {number} query.id ID DA NOTIFICACAO
  * @returns {object} 200 - REPONDE COM A NOTIFICACAO REQUERIDA
+ * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
+ * @returns 400 - RESPONDE APENAS COM O STATUS SE O ID NAO FOR ENVIADO
  * @returns 404 - RESPONDE APENAS COM O STATUS SE A NOTIFICACAO NAO EXISTIR
 */
 export function notification(req, res) {
-	const token = req.headers["authorization"].split(" ")[1];
-	const { id } = req.query;
+	const { authorization } = req.headers;
+	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
-	if (token !== "12345") return (res.sendStatus(401));
+	const { id } = req.query;
+	if (!id) return (res.sendStatus(400));
 	if (id === "1") return (res.status(200).json(notification1));
 	if (id === "2") return (res.status(200).json(notification2));
 	if (id === "3") return (res.status(200).json(notification3));
 	if (id === "4") return (res.status(200).json(notification4));
 	if (id === "5") return (res.status(200).json(notification5));
-	setTimeout(() => res.sendStatus(404), 1000);
+	res.sendStatus(404);
 }
 
 /**

@@ -474,6 +474,7 @@ Content-Type: application/json
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
 | `200`  | A API retorna o hitórico de notificaçõs.                           |
+| `400`  | Id não enviado.                                                    |
 | `401`  | Token expirado ou inválido.                                        |
 | `404`  | Notificação não encontrada.                                        |
 
@@ -481,7 +482,7 @@ Content-Type: application/json
 
 ### Exemplo de Requisição
 ```https
-GET /notifications?id=3
+GET /notification?id=3
 Authorization: Bearer 12345
 ```
 

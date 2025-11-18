@@ -95,7 +95,6 @@ export async function loginCredentials(req, res) {
 
 	if (!email || typeof email !== "string" || typeof password !== "string" || !password) return (res.sendStatus(400));
 	if ((email !== process.env.EMAIL && email !== "Vampeta") || password !== "123") return (res.sendStatus(401));
-	if (typeof tokenNotifications === "undefined") console.log("undefined")
 	if (tokenNotifications === undefined) return (res.status(200).send(getLoginToken(false)));
 	if (!tokenNotifications || typeof tokenNotifications !== "string") return (res.status(207).send(getLoginToken(false)));
 	const result = await axios.post("https://exp.host/--/api/v2/push/send", { to: tokenNotifications });
