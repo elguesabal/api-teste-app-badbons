@@ -1,3 +1,11 @@
+export const listNotificationsNotFound = {
+	pagination: {
+		nextPage: false,
+		totalPages: 2
+	},
+	data: []
+}
+
 export const listNotifications1 = {
 	pagination: {
 		nextPage: true,

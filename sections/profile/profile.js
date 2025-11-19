@@ -102,7 +102,7 @@ export function gameHistory(req, res) {
 	}
 }
 
-import { listNotifications1, listNotifications2 } from "./listNotifications.js";
+import { listNotifications1, listNotifications2, listNotificationsNotFound } from "./listNotifications.js";
 /**
  * @author VAMPETA
  * @brief ROTA QUE RETORNA AS NOTIFICACOES DO USUARIO
@@ -114,16 +114,17 @@ import { listNotifications1, listNotifications2 } from "./listNotifications.js";
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function notifications(req, res) {
-	const token = req.headers["authorization"].split(" ")[1];
-	const { page } = req.query;
+	const { authorization } = req.headers;
+	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
-	if (token !== "12345") return (res.sendStatus(401));
+	const { page } = req.query;
+	if (!page || Number.isNaN(Number(page)) || Number(page) < 1) return (res.sendStatus(400));
 	if (page === "1") {
 		setTimeout(() => res.status(200).json(listNotifications1), 1000);
 	} else if (page === "2") {
 		setTimeout(() => res.status(200).json(listNotifications2), 1000);
 	} else {
-		setTimeout(() => res.status(200).json([]), 1000);
+		setTimeout(() => res.status(200).json(listNotificationsNotFound), 1000);
 	}
 }
 
