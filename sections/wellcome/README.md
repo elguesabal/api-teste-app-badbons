@@ -22,7 +22,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 | Código | Descrição                                                           |
 |--------|---------------------------------------------------------------------|
 | `204`  | O servidor está acessível e a versão do app é compatível com a API. |
-| `400`  | O servidor está acessível, mas a versão do app não foi informada.   |
+| `400`  | O servidor está acessível, mas a versão do app for inválida.        |
 | `426`  | O servidor está acessível, mas a versão do app é incompatível.      |
 
 ---

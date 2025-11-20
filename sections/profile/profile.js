@@ -77,7 +77,7 @@ export function swapPassword(req, res) {
 	setTimeout(() => res.sendStatus(204), 1000);
 }
 
-import { events1, events2 } from "./events.js";
+import { eventsNotFound, events1, events2 } from "./events.js";
 /**
  * @author VAMPETA
  * @brief ROTA QUE RETORNA O HITORICO DE PARTIDA
@@ -89,16 +89,17 @@ import { events1, events2 } from "./events.js";
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function gameHistory(req, res) {
-	const token = req.headers["authorization"].split(" ")[1];
-	const { page } = req.query;
+	const { authorization } = req.headers;
+	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
-	if (token !== "12345") return (res.sendStatus(401));
+	const { page } = req.query;
+	if (!page || Number.isNaN(Number(page)) || Number(page) < 1) return (res.sendStatus(400));
 	if (page === "1") {
 		setTimeout(() => res.status(200).json(events1), 1000);
 	} else if (page === "2") {
 		setTimeout(() => res.status(200).json(events2), 1000);
 	} else {
-		setTimeout(() => res.status(200).json([]), 1000);
+		setTimeout(() => res.status(200).json(eventsNotFound), 1000);
 	}
 }
 

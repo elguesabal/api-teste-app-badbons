@@ -1,3 +1,11 @@
+export const eventsNotFound = {
+	pagination: {
+		nextPage: true,
+		totalPages: 2
+	},
+	data: []
+};
+
 export const events1 = {
 	pagination: {
 		nextPage: true,

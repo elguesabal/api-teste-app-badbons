@@ -10,13 +10,14 @@ import { versions } from "./versions.js";
  * @route /ping
  * @param {string} query.version VERSAO DO APP
  * @returns 204 - RESPONDE APENAS COM O STATUS SE A API FOR COMPATIVEL
- * @returns 400 - RESPONDE APENAS COM O STATUS SE 'version' NAO FOR ENVIADO
+ * @returns 400 - RESPONDE APENAS COM O STATUS SE 'version' NAO FOR ENVIADO OU INVALIDO
  * @returns 426 - RESPONDE APENAS COM O STATUS SE A API NAO FOR COMPATIVEL
 */
 export function ping(req, res) {
 	const { version } = req.query;
 
 	if (!version) return (res.sendStatus(400));
+	if (!/^[0-9]+\.[0-9]+\.[0-9]+$/.test(version)) return (res.sendStatus(400));
 	setTimeout(() => res.sendStatus((versions.includes(version)) ? 204 : 426), 2000);
 }
 
