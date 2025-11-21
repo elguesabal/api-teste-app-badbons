@@ -6,7 +6,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 
 ### Salva a imagem de perfil do usuário.
 ```https
-  PATCH /upload-photo-profile
+  PATCH /user/update-image
 ```
 
 ---
@@ -204,6 +204,7 @@ HTTP/1.1 200 OK
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
 | `200`  | A API retorna o hitórico de partidas.                              |
+| `400`  | Número da página de pesquisa inválido ou não enviado.              |
 | `401`  | Token expirado ou inválido.                                        |
 
 ---

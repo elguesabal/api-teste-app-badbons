@@ -14,11 +14,21 @@ import { parsePhoneNumberFromString as phoneValidator } from "libphonenumber-js"
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function uploadPhotoProfile(req, res) {
-	const token = req.headers["authorization"].split(" ")[1];
-	// const img = req.file; // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
+	// const token = req.headers["authorization"].split(" ")[1];
+	// // const img = req.file; // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
 
-	if (token !== "12345") return (res.sendStatus(401));
-	// if (!img) return (res.sendStatus(400)); // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
+	// if (token !== "12345") return (res.sendStatus(401));
+	// // if (!img) return (res.sendStatus(400)); // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
+	// setTimeout(() => res.sendStatus(200), 2000);
+
+
+
+	const { authorization } = req.headers;
+	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
+
+	const img = req.file;
+	if (!img) return (res.sendStatus(400));
+	// console.log(img)									// PAREI AKI LENDO A IMAGEM
 	setTimeout(() => res.sendStatus(200), 2000);
 }
 
@@ -86,6 +96,7 @@ import { eventsNotFound, events1, events2 } from "./events.js";
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @param {number} query.page PAGINA DE PARTIDAS (EXEMPLO: A 1° PAGINA CONTEM AS 15 ULTIMAS PARTIDAS E A 2° PAGINA CONTEM AS PARTIDAS 16 ATE A 30)
  * @returns {object} 200 - REPONDE COM O HISTORICO DE PARTIDAS DO USUARIO
+ * @returns 400 - RESPONDE APENAS COM O STATUS SE page FOR INVALIDO OU NAO ENVIADO
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function gameHistory(req, res) {
