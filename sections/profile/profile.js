@@ -28,7 +28,7 @@ export function uploadPhotoProfile(req, res) {
 
 	const img = req.file;
 	if (!img) return (res.sendStatus(400));
-	// console.log(img)									// PAREI AKI LENDO A IMAGEM
+	// console.log(img)								// PAREI AKI LENDO A IMAGEM
 	setTimeout(() => res.sendStatus(200), 2000);
 }
 
