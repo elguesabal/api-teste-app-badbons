@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import multer from "multer"; // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
+// import multer from "multer"; // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
 import axios from "axios";
 import dotenv from "dotenv";
 
@@ -20,7 +20,7 @@ dotenv.config({ quiet: true });
 // 	}
 // });
 // const upload = multer({ storage });
-const upload = multer({ storage: multer.memoryStorage() });
+// const upload = multer({ storage: multer.memoryStorage() });
 
 
 import { ping, trainingLocations, timetableUnits, register, loginCredentials, credentials, loginToken, img } from "./sections/wellcome/wellcome.js";
@@ -33,9 +33,10 @@ app.get("/credentials", credentials);
 app.post("/auth/login-token", loginToken);
 app.get("/img/:img", img);
 
-import { uploadPhotoProfile, swapEmail, swapPassword, gameHistory, notifications, notification, swapCredentials } from "./sections/profile/profile.js";
-app.patch("/user/update-image", upload.single("fotoPerfil"), uploadPhotoProfile); // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
+import { middlewareUploadPhotoProfile, uploadPhotoProfile, swapEmail, swapPassword, gameHistory, notifications, notification, swapCredentials } from "./sections/profile/profile.js";
+// app.patch("/user/update-image", upload.single("fotoPerfil"), uploadPhotoProfile); // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
 // app.patch("/user/update-image", uploadPhotoProfile);
+app.patch("/user/update-image", middlewareUploadPhotoProfile, uploadPhotoProfile);
 app.patch("/swap-email", swapEmail);
 app.patch("/swap-password", swapPassword);
 app.get("/game-history", gameHistory);
