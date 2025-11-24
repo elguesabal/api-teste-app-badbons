@@ -6,13 +6,14 @@ import { parsePhoneNumberFromString as phoneValidator } from "libphonenumber-js"
 const upload = multer({ storage: multer.memoryStorage() });
 
 /**
-				DOCUMENTAR AKI DPS
+ * @author VAMPETA
+ * @brief MIDDLEWARE PARA TRATAR O UPLOAD DA ROTA /user/update-image
+ * @returns 400 - RESPONDE APENAS COM O STATUS SE O NOME DO CAMPO FOR AUSENTE
 */
 export function middlewareUploadPhotoProfile(req, res, next) {
+	if (!req.headers["content-type"]?.startsWith("multipart/form-data")) return (res.sendStatus(415));
 	upload.single("fotoPerfil")(req, res, (error) => {
-		if (error) {
-			return (res.sendStatus(400));
-		}
+		if (error) return (res.sendStatus(400));
 		next();
 	});
 }
@@ -24,22 +25,13 @@ export function middlewareUploadPhotoProfile(req, res, next) {
  * @route /user/update-image
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @param {Express.Multer.File} body.file IMAGEM ENVIADA PELO USUARIO VIA multipart/form-data (NESSE MOMENTO ESSE PARAMETRO NAO ESTA SENDO OBRIGATORIO POR ESTA DESABILITADO)
- * @returns 200 - RESPONDE APENAS COM O STATUS
+ * @returns 204 - RESPONDE APENAS COM O STATUS
  * @returns 400 - RESPONDE APENAS COM O STATUS SE O USUARIO NAO MANDAR A IMAGEM
  * @returns 401 - RESPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
  * @returns 413 - RESPONDE APENAS COM O STATUS SE A IMAGEM FOR MUITO GRANDE
  * @returns 415 - RESPONDE APENAS COM O STATUS SE A IMAGEM FOR DE UM TIPO NAO SUPORTADO
 */
 export function uploadPhotoProfile(req, res) {
-	// const token = req.headers["authorization"].split(" ")[1];
-	// // const img = req.file; // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
-
-	// if (token !== "12345") return (res.sendStatus(401));
-	// // if (!img) return (res.sendStatus(400)); // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
-	// setTimeout(() => res.sendStatus(200), 2000);
-
-
-
 	const { authorization } = req.headers;
 	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
@@ -48,9 +40,10 @@ export function uploadPhotoProfile(req, res) {
 	if (!["jpg", "jpeg", "png", "heic"].includes(img.originalname.split(".").pop().toLowerCase())) return (res.sendStatus(415));
 	if (!["image/jpeg", "image/png", "image/heic"].includes(img.mimetype)) return (res.sendStatus(415));
 	if (!img.buffer || img.buffer.length === 0) return (res.sendStatus(400));
-	if (img.size > 5 * 1024 * 1024) return res.sendStatus(413); // LIMETE DE 5MB
-	console.log(img)
-	setTimeout(() => res.sendStatus(200), 2000);
+	if (img.size > 5 * 1024 * 1024) return res.sendStatus(413);
+	// console.log(img)
+	// console.log(req.headers)
+	setTimeout(() => res.sendStatus(204), 2000);
 }
 
 /**
