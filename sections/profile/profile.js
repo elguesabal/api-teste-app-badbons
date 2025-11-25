@@ -1,7 +1,8 @@
-import multer from "multer"; // COMENTANDO ESSE TRECHO DO CODIGO PQ O VERCEL NAO ME DA PERMISSAO DE ESCRITA
+import multer from "multer";
 import validator from "validator";
 import { cpf as cpfValidator } from "cpf-cnpj-validator";
 import { parsePhoneNumberFromString as phoneValidator } from "libphonenumber-js";
+import { fileTypeFromBuffer } from "file-type";
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -31,18 +32,20 @@ export function middlewareUploadPhotoProfile(req, res, next) {
  * @returns 413 - RESPONDE APENAS COM O STATUS SE A IMAGEM FOR MUITO GRANDE
  * @returns 415 - RESPONDE APENAS COM O STATUS SE A IMAGEM FOR DE UM TIPO NAO SUPORTADO
 */
-export function uploadPhotoProfile(req, res) {
+export async function uploadPhotoProfile(req, res) {
 	const { authorization } = req.headers;
 	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
 	const img = req.file;
 	if (!img || img.fieldname !== "fotoPerfil") return (res.sendStatus(400));
-	if (!["jpg", "jpeg", "png", "heic"].includes(img.originalname.split(".").pop().toLowerCase())) return (res.sendStatus(415));
+    const detected = await fileTypeFromBuffer(img.buffer);
+    if (!detected) return (res.sendStatus(415));
 	if (!["image/jpeg", "image/png", "image/heic"].includes(img.mimetype)) return (res.sendStatus(415));
+	if (!["jpg", "jpeg", "png", "heic"].includes(img.originalname.split(".").pop().toLowerCase())) return (res.sendStatus(415));
+    if (!["image/jpeg", "image/png", "image/heic"].includes(detected.mime)) return (res.sendStatus(415));
+    if (!["jpg", "jpeg", "png", "heic"].includes(detected.ext)) return (res.sendStatus(415));
 	if (!img.buffer || img.buffer.length === 0) return (res.sendStatus(400));
-	if (img.size > 5 * 1024 * 1024) return res.sendStatus(413);
-	// console.log(img)
-	// console.log(req.headers)
+	if (img.size > 4 * 1024 * 1024) return res.sendStatus(413);
 	setTimeout(() => res.sendStatus(204), 2000);
 }
 

@@ -31,7 +31,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 | `204`  | Imagem salva com sucesso.                                          |
 | `400`  | Imagem não enviada ou conter algum outro erro.                     |
 | `401`  | Token expirado ou inválido.                                        |
-| `413`  | Imagem enviada é maior que 5 MB.                                   |
+| `413`  | Imagem enviada é maior que 4 MB.                                   |
 | `415`  | Imagem enviada não é suportada.                                    |
 
 ---
