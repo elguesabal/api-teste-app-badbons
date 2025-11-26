@@ -38,7 +38,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 
 ### Exemplo de Requisição
 ```https
-PATCH /upload-photo-profile
+PATCH /user/update-image
 Authorization: Bearer 12345
 Content-Type: multipart/form-data
 
