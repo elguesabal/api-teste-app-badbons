@@ -4,8 +4,6 @@ import { cpf as cpfValidator } from "cpf-cnpj-validator";
 import { parsePhoneNumberFromString as phoneValidator } from "libphonenumber-js";
 import { fileTypeFromBuffer } from "file-type";
 
-const upload = multer({ storage: multer.memoryStorage() });
-
 /**
  * @author VAMPETA
  * @brief MIDDLEWARE PARA TRATAR O UPLOAD DA ROTA /user/update-image
@@ -13,7 +11,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 */
 export function middlewareUploadPhotoProfile(req, res, next) {
 	if (!req.headers["content-type"]?.startsWith("multipart/form-data")) return (res.sendStatus(415));
-	upload.single("fotoPerfil")(req, res, (error) => {
+	multer({ storage: multer.memoryStorage() }).single("fotoPerfil")(req, res, (error) => {
 		if (error) return (res.sendStatus(400));
 		next();
 	});
@@ -122,13 +120,9 @@ export function gameHistory(req, res) {
 
 	const { page } = req.query;
 	if (!page || Number.isNaN(Number(page)) || Number(page) < 1) return (res.sendStatus(400));
-	if (page === "1") {
-		setTimeout(() => res.status(200).json(events1), 1000);
-	} else if (page === "2") {
-		setTimeout(() => res.status(200).json(events2), 1000);
-	} else {
-		setTimeout(() => res.status(200).json(eventsNotFound), 1000);
-	}
+	if (page === "1") return (setTimeout(() => res.status(200).json(events1), 1000));
+	if (page === "2") return (setTimeout(() => res.status(200).json(events2), 1000));
+	setTimeout(() => res.status(200).json(eventsNotFound), 1000);
 }
 
 import { listNotifications1, listNotifications2, listNotificationsNotFound } from "./listNotifications.js";
@@ -148,13 +142,9 @@ export function notifications(req, res) {
 
 	const { page } = req.query;
 	if (!page || Number.isNaN(Number(page)) || Number(page) < 1) return (res.sendStatus(400));
-	if (page === "1") {
-		setTimeout(() => res.status(200).json(listNotifications1), 1000);
-	} else if (page === "2") {
-		setTimeout(() => res.status(200).json(listNotifications2), 1000);
-	} else {
-		setTimeout(() => res.status(200).json(listNotificationsNotFound), 1000);
-	}
+	if (page === "1") return (setTimeout(() => res.status(200).json(listNotifications1), 1000));
+	if (page === "2") return (setTimeout(() => res.status(200).json(listNotifications2), 1000));
+	setTimeout(() => res.status(200).json(listNotificationsNotFound), 1000);
 }
 
 import { notification1, notification2, notification3, notification4, notification5 } from "./notification.js";

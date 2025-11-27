@@ -84,6 +84,7 @@ HTTP/1.1 200 OK
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
 | `200`  | Retorna um objeto com informaçõs do treino.                        |
+| `400`  | Data não enviada, não padrão de data ou contem algum outro erro.   |
 | `401`  | Token expirado ou inválido.                                        |
 
 ---

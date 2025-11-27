@@ -29,7 +29,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
 | `204`  | Imagem salva com sucesso.                                          |
-| `400`  | Imagem não enviada ou conter algum outro erro.                     |
+| `400`  | Imagem não enviada ou contem algum outro erro.                     |
 | `401`  | Token expirado ou inválido.                                        |
 | `413`  | Imagem enviada é maior que 4 MB.                                   |
 | `415`  | Imagem enviada não é suportada.                                    |

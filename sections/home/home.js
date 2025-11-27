@@ -1,3 +1,5 @@
+import validator from "validator";
+
 /**
  * @author VAMPETA
  * @brief ROTA QUE O CLIENTE DEVE INFORMAR SE ELE VAI AO TREINO OU NAO
@@ -23,20 +25,34 @@ import { segunda, terca, quarta, quinta, sexta, sabado, domingo } from "./days.j
  * @method GET
  * @route /presence-list
  * @param {string} headers.authorization TOKEN DO USUARIO
- * @param {string} queri.day DIA QUE O USUARIO ESTA CONSULTANDO
+ * @param {string} query.date DIA QUE O USUARIO ESTA CONSULTANDO
  * @returns {object} 200 - REPONDE COM A LISTA DE ALUNOS CONFIRMADOS PARA IR AO TREINO E ALGUMAS OUTRAS INFORMACOES DENTRO DO OBJETO
+ * @returns 400 - RESPONDE APENAS COM O STATUS SE A DATA FOR INVALIDA
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
 */
 export function presenceList(req, res) {
-	const token = req.headers["authorization"].split(" ")[1];
+	// const token = req.headers["authorization"].split(" ")[1];
+	// const { date } = req.query;
+	// const [day, month, year] = date.split("/");
+	// const newDate = new Date(`${year}-${month}-${day}`);
+
+	// if (token !== "12345") return (res.sendStatus(401));
+	// if (newDate.getDay() === 2) res.status(200).json(quarta);
+	// if (newDate.getDay() === 3) res.status(200).json(quinta);
+	// if (newDate.getDay() === 5) setTimeout(() => res.status(200).json(sabado), 2000);
+
+
+
+	const { authorization } = req.headers;
+	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
+
 	const { date } = req.query;
+	if (!validator.isDate(date, { format: "DD/MM/YYYY", strictMode: true })) return (res.sendStatus(400));
 	const [day, month, year] = date.split("/");
 	const newDate = new Date(`${year}-${month}-${day}`);
-
-	if (token !== "12345") return (res.sendStatus(401));
-	if (newDate.getDay() === 2) res.status(200).json(quarta);
-	if (newDate.getDay() === 3) res.status(200).json(quinta);
-	if (newDate.getDay() === 5) setTimeout(() => res.status(200).json(sabado), 2000);
+	if (newDate.getDay() === 2) return (res.status(200).json(quarta));
+	if (newDate.getDay() === 3) return (res.status(200).json(quinta));
+	if (newDate.getDay() === 5) return (setTimeout(() => res.status(200).json(sabado), 2000));
 }
 
 /**
@@ -50,7 +66,7 @@ export function presenceList(req, res) {
 */
 export function exercises(req, res) {
 	const { authorization } = req.headers;
-
 	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
+
 	setTimeout(() => res.status(200).json({ treinosTotais: 10, treinosFeitos: 5 }), 2000);
 }
