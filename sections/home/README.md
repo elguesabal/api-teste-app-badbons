@@ -6,7 +6,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 
 ### Salva a informação se o aluno irá ao treino.
 ```https
-  POST /presence-student
+  PATCH /presence-student
 ```
 
 ---
@@ -28,14 +28,16 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 ### Respostas
 | Código | Descrição                                                          |
 |--------|--------------------------------------------------------------------|
-| `200`  | Confirmação de presença feita com sucesso.                         |
+| `204`  | Confirmação de presença feita com sucesso.                         |
+| `400`  | Confirmação de presença inválida.                                  |
 | `401`  | Token expirado ou inválido.                                        |
+| `409`  | O status de presença é igual ao da requisição.                     |
 
 ---
 
 ### Exemplo de Requisição
 ```https
-POST /presence-student
+PATCH /presence-student
 Authorization: Bearer 12345
 Content-Type: application/json
 
@@ -46,7 +48,7 @@ Content-Type: application/json
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 204
 ```
 
 
@@ -86,6 +88,7 @@ HTTP/1.1 200 OK
 | `200`  | Retorna um objeto com informaçõs do treino.                        |
 | `400`  | Data não enviada, não padrão de data ou contem algum outro erro.   |
 | `401`  | Token expirado ou inválido.                                        |
+| `404`  | Sem treino na data enviada.                                        |
 
 ---
 
@@ -97,7 +100,7 @@ Authorization: Bearer 12345
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 200
 Content-Type: application/json
 
 {
@@ -150,7 +153,7 @@ Authorization: Bearer 12345
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 200
 Content-Type: application/json
 
 {

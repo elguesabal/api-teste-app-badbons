@@ -1,21 +1,30 @@
 import validator from "validator";
 
+let presenceDatabase = false;
+// let { presenceQuarta, presenceQuinta, presenceSabado } = { presenceQuarta: quarta.confirmedPresence, presenceQuinta: quinta.confirmedPresence, presenceSabado: sabado.confirmedPresence };
+// console.log(presenceQuarta, presenceQuinta, presenceSabado);
 /**
  * @author VAMPETA
  * @brief ROTA QUE O CLIENTE DEVE INFORMAR SE ELE VAI AO TREINO OU NAO
- * @method POST
+ * @method PATCH
  * @route /presence-student
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @param {boolean} body.presence CONFIRMACAO DE PRESENCA NO TREINO
- * @returns 200 - REPONDE APENAS COM O STATUS
+ * @returns 204 - REPONDE APENAS COM O STATUS
+ * @returns 400 - REPONDE APENAS COM O STATUS SE A CONFIRMACAO DE PRESENCA FOR INVALIDA
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
+ * @returns 409 - REPONDE APENAS COM O STATUS SE A CONFIRMACAO DE PRESENCA FOR IGUAL A ANTERIOR
 */
-export function presenceStudent(req, res) {
-	const token = req.headers["authorization"].split(" ")[1];
-	const { presence } = req.body;
+export function presenceStudent(req, res) {				// ESUQECI DO DETALHE Q PRECISO DE SABER A DATA DO TREINO PRA ESSA ROTA DAR CERTO
+	const { authorization } = req.headers;
+	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
-	if (token !== "12345") return (res.sendStatus(401));
-	setTimeout(() => res.sendStatus(200), 1000);
+	if (!req.body) return (res.sendStatus(400));
+	const { presence } = req.body;
+	if (typeof presence !== "boolean") return (res.sendStatus(400));
+	if (presence === presenceDatabase) return (res.sendStatus(409));
+	presenceDatabase = presence;
+	setTimeout(() => res.sendStatus(204), 1000);
 }
 
 import { segunda, terca, quarta, quinta, sexta, sabado, domingo } from "./days.js";
@@ -29,20 +38,9 @@ import { segunda, terca, quarta, quinta, sexta, sabado, domingo } from "./days.j
  * @returns {object} 200 - REPONDE COM A LISTA DE ALUNOS CONFIRMADOS PARA IR AO TREINO E ALGUMAS OUTRAS INFORMACOES DENTRO DO OBJETO
  * @returns 400 - RESPONDE APENAS COM O STATUS SE A DATA FOR INVALIDA
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
+ * @returns 404 - REPONDE APENAS COM O STATUS SE NAO OUVER TREINO NESSA DATA
 */
 export function presenceList(req, res) {
-	// const token = req.headers["authorization"].split(" ")[1];
-	// const { date } = req.query;
-	// const [day, month, year] = date.split("/");
-	// const newDate = new Date(`${year}-${month}-${day}`);
-
-	// if (token !== "12345") return (res.sendStatus(401));
-	// if (newDate.getDay() === 2) res.status(200).json(quarta);
-	// if (newDate.getDay() === 3) res.status(200).json(quinta);
-	// if (newDate.getDay() === 5) setTimeout(() => res.status(200).json(sabado), 2000);
-
-
-
 	const { authorization } = req.headers;
 	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
@@ -53,6 +51,7 @@ export function presenceList(req, res) {
 	if (newDate.getDay() === 2) return (res.status(200).json(quarta));
 	if (newDate.getDay() === 3) return (res.status(200).json(quinta));
 	if (newDate.getDay() === 5) return (setTimeout(() => res.status(200).json(sabado), 2000));
+	res.sendStatus(404);
 }
 
 /**

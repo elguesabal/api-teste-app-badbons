@@ -30,7 +30,7 @@ app.get("/notification", notification);
 app.patch("/swap-credentials", swapCredentials);
 
 import { presenceStudent, presenceList, exercises } from "./sections/home/home.js";
-app.post("/presence-student", presenceStudent);
+app.patch("/presence-student", presenceStudent);
 app.get("/presence-list", presenceList);
 app.get("/user/treinos", exercises);
 

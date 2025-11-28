@@ -47,7 +47,7 @@ Content-Type: multipart/form-data
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 204
 ```
 
 
@@ -107,7 +107,7 @@ Content-Type: application/json
 
 ### Exemplo de Resposta (status 204)
 ```https
-HTTP/1.1 204 OK
+HTTP/1.1 204
 ```
 
 
@@ -168,7 +168,7 @@ Content-Type: application/json
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 204
 ```
 
 
@@ -219,7 +219,7 @@ Authorization: Bearer 12345
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 200
 Content-Type: application/json
 
 {
@@ -324,7 +324,7 @@ Authorization: Bearer 12345
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 200
 Content-Type: application/json
 
 {
@@ -491,7 +491,7 @@ Authorization: Bearer 12345
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 200
 Content-Type: application/json
 
 {
@@ -563,5 +563,5 @@ Content-Type: application/json
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 204
 ```

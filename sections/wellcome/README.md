@@ -34,7 +34,7 @@ GET /ping?version=1.0.1
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 204
 ```
 
 
@@ -68,7 +68,7 @@ GET /training-locations
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 200
 Content-Type: application/json
 
 [
@@ -121,7 +121,7 @@ GET /timetable-units?units[]=Bonsucesso&units[]=Madureira
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 200
 Content-Type: application/json
 
 [
@@ -283,7 +283,7 @@ Content-Type: application/json
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 200
 
 {
   RefreshToken: "12345",
@@ -337,7 +337,7 @@ Content-Type: application/json
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 200
 
 {
   _id: "123",
@@ -399,7 +399,7 @@ Authorization: Bearer 12345
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 204
 ```
 
 
@@ -450,7 +450,7 @@ Authorization: Bearer 12345
 
 ### Exemplo de Resposta (status 200)
 ```https
-HTTP/1.1 200 OK
+HTTP/1.1 200
 Content-Type: image/jpg
 
 (binary image data)
