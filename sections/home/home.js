@@ -15,7 +15,7 @@ let presenceDatabase = false;
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
  * @returns 409 - REPONDE APENAS COM O STATUS SE A CONFIRMACAO DE PRESENCA FOR IGUAL A ANTERIOR
 */
-export function presenceStudent(req, res) {				// ESUQECI DO DETALHE Q PRECISO DE SABER A DATA DO TREINO PRA ESSA ROTA DAR CERTO
+export function presenceStudent(req, res) {			// ESQUECI DO DETALHE Q PRECISO DE SABER A DATA DO TREINO PRA ESSA ROTA DAR CERTO
 	const { authorization } = req.headers;
 	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
