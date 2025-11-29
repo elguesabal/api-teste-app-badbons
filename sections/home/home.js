@@ -1,29 +1,36 @@
 import validator from "validator";
 
-let presenceDatabase = false;
-// let { presenceQuarta, presenceQuinta, presenceSabado } = { presenceQuarta: quarta.confirmedPresence, presenceQuinta: quinta.confirmedPresence, presenceSabado: sabado.confirmedPresence };
-// console.log(presenceQuarta, presenceQuinta, presenceSabado);
+let { presenceQuarta, presenceQuinta, presenceSabado } = { presenceQuarta: quarta.confirmedPresence, presenceQuinta: quinta.confirmedPresence, presenceSabado: sabado.confirmedPresence };
 /**
  * @author VAMPETA
  * @brief ROTA QUE O CLIENTE DEVE INFORMAR SE ELE VAI AO TREINO OU NAO
  * @method PATCH
  * @route /presence-student
  * @param {string} headers.authorization TOKEN DO USUARIO
+ * @param {string} body.date DATA DO TREINO
  * @param {boolean} body.presence CONFIRMACAO DE PRESENCA NO TREINO
  * @returns 204 - REPONDE APENAS COM O STATUS
  * @returns 400 - REPONDE APENAS COM O STATUS SE A CONFIRMACAO DE PRESENCA FOR INVALIDA
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
  * @returns 409 - REPONDE APENAS COM O STATUS SE A CONFIRMACAO DE PRESENCA FOR IGUAL A ANTERIOR
 */
-export function presenceStudent(req, res) {			// ESQUECI DO DETALHE Q PRECISO DE SABER A DATA DO TREINO PRA ESSA ROTA DAR CERTO
+export function presenceStudent(req, res) {			// E SE A DATA JA PASSOU? O ALUNO VAI PODER ALTERAR A PRESENCA?
 	const { authorization } = req.headers;
 	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
 	if (!req.body) return (res.sendStatus(400));
-	const { presence } = req.body;
-	if (typeof presence !== "boolean") return (res.sendStatus(400));
-	if (presence === presenceDatabase) return (res.sendStatus(409));
-	presenceDatabase = presence;
+	const { date, presence } = req.body;
+	if (!validator.isDate(date, { format: "DD/MM/YYYY", strictMode: true }) || typeof presence !== "boolean") return (res.sendStatus(400));
+	const [day, month, year] = date.split("/");
+	const newDate = new Date(`${year}-${month}-${day}`);
+	const dataBR = new Date().toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+	if (dataBR < newDate) return (res.sendStatus(999));			// VERIFICAR SE A DATA JA PASSOU		// PAREI AKI
+	if (newDate.getDay() === 2 && presence === presenceQuarta) return (res.sendStatus(409));
+	if (newDate.getDay() === 3 && presence === presenceQuinta) return (res.sendStatus(409));
+	if (newDate.getDay() === 5 && presence === presenceSabado) return (res.sendStatus(409));
+	if (newDate.getDay() === 2) presenceQuarta = presence;
+	if (newDate.getDay() === 3) presenceQuinta = presence;
+	if (newDate.getDay() === 5) presenceSabado = presence;
 	setTimeout(() => res.sendStatus(204), 1000);
 }
 

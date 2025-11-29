@@ -22,6 +22,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 | Parâmetro  | Tipo      | Obrigatório | Descrição                            |
 |------------|-----------|-------------|--------------------------------------|
 | `presence` | `boolean` | Sim         | Confirmação de presença.             |
+| `date`     | `string`  | Sim         | Data do treino.                      |
 
 ---
 
