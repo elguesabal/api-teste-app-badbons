@@ -32,7 +32,7 @@ Este documento descreve exclusivamente as requisições relacionadas às funcion
 | `204`  | Confirmação de presença feita com sucesso.                         |
 | `400`  | Confirmação de presença inválida.                                  |
 | `401`  | Token expirado ou inválido.                                        |
-| `409`  | O status de presença é igual ao da requisição.                     |
+| `409`  | O status de presença é igual ao da requisição ou a data já passou. |
 
 ---
 

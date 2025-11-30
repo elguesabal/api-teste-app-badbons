@@ -12,9 +12,9 @@ let { presenceQuarta, presenceQuinta, presenceSabado } = { presenceQuarta: quart
  * @returns 204 - REPONDE APENAS COM O STATUS
  * @returns 400 - REPONDE APENAS COM O STATUS SE A CONFIRMACAO DE PRESENCA FOR INVALIDA
  * @returns 401 - REPONDE APENAS COM O STATUS SE O TOKEN FOR INVALIDO
- * @returns 409 - REPONDE APENAS COM O STATUS SE A CONFIRMACAO DE PRESENCA FOR IGUAL A ANTERIOR
+ * @returns 409 - REPONDE APENAS COM O STATUS SE A CONFIRMACAO DE PRESENCA FOR IGUAL A ANTERIOR OU JA PASSOU DA DATA
 */
-export function presenceStudent(req, res) {			// E SE A DATA JA PASSOU? O ALUNO VAI PODER ALTERAR A PRESENCA?
+export function presenceStudent(req, res) {
 	const { authorization } = req.headers;
 	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
@@ -22,15 +22,16 @@ export function presenceStudent(req, res) {			// E SE A DATA JA PASSOU? O ALUNO 
 	const { date, presence } = req.body;
 	if (!validator.isDate(date, { format: "DD/MM/YYYY", strictMode: true }) || typeof presence !== "boolean") return (res.sendStatus(400));
 	const [day, month, year] = date.split("/");
-	const newDate = new Date(`${year}-${month}-${day}`);
-	const dataBR = new Date().toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
-	if (dataBR < newDate) return (res.sendStatus(999));			// VERIFICAR SE A DATA JA PASSOU		// PAREI AKI
-	if (newDate.getDay() === 2 && presence === presenceQuarta) return (res.sendStatus(409));
-	if (newDate.getDay() === 3 && presence === presenceQuinta) return (res.sendStatus(409));
-	if (newDate.getDay() === 5 && presence === presenceSabado) return (res.sendStatus(409));
-	if (newDate.getDay() === 2) presenceQuarta = presence;
-	if (newDate.getDay() === 3) presenceQuinta = presence;
-	if (newDate.getDay() === 5) presenceSabado = presence;
+	// const newDate = new Date(`${year}-${month}-${day}`); // JEITO ERRADO
+	const newDate = new Date(year, month - 1, day);	// JEITO CERTO
+	const dataBR = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+	if (newDate < dataBR) return (res.sendStatus(409));
+	if (newDate.getDay() === 3 && presence === presenceQuarta) return (res.sendStatus(409));
+	if (newDate.getDay() === 4 && presence === presenceQuinta) return (res.sendStatus(409));
+	if (newDate.getDay() === 6 && presence === presenceSabado) return (res.sendStatus(409));
+	if (newDate.getDay() === 3) presenceQuarta = presence;
+	if (newDate.getDay() === 4) presenceQuinta = presence;
+	if (newDate.getDay() === 6) presenceSabado = presence;
 	setTimeout(() => res.sendStatus(204), 1000);
 }
 
