@@ -22,8 +22,7 @@ export function presenceStudent(req, res) {
 	const { date, presence } = req.body;
 	if (!validator.isDate(date, { format: "DD/MM/YYYY", strictMode: true }) || typeof presence !== "boolean") return (res.sendStatus(400));
 	const [day, month, year] = date.split("/");
-	// const newDate = new Date(`${year}-${month}-${day}`); // JEITO ERRADO
-	const newDate = new Date(year, month - 1, day);	// JEITO CERTO
+	const newDate = new Date(year, month - 1, day);
 	const dataBR = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
 	if (newDate < dataBR) return (res.sendStatus(409));
 	if (newDate.getDay() === 3 && presence === presenceQuarta) return (res.sendStatus(409));
@@ -55,10 +54,10 @@ export function presenceList(req, res) {
 	const { date } = req.query;
 	if (!validator.isDate(date, { format: "DD/MM/YYYY", strictMode: true })) return (res.sendStatus(400));
 	const [day, month, year] = date.split("/");
-	const newDate = new Date(`${year}-${month}-${day}`);
-	if (newDate.getDay() === 2) return (res.status(200).json(quarta));
-	if (newDate.getDay() === 3) return (res.status(200).json(quinta));
-	if (newDate.getDay() === 5) return (setTimeout(() => res.status(200).json(sabado), 2000));
+	const newDate = new Date(year, month - 1, day);
+	if (newDate.getDay() === 3) return (res.status(200).json(quarta));
+	if (newDate.getDay() === 4) return (res.status(200).json(quinta));
+	if (newDate.getDay() === 6) return (setTimeout(() => res.status(200).json(sabado), 2000));
 	res.sendStatus(404);
 }
 
