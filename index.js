@@ -16,7 +16,7 @@ app.get("/training-locations", trainingLocations);
 app.get("/timetable-units", timetableUnits);
 app.post("/register", register);
 app.post("/auth/login", loginCredentials);
-app.get("/credentials", credentials);
+app.get("/credentials", credentials);			// PROXIMO A CRIAR TESTES?
 app.post("/auth/login-token", loginToken);
 app.get("/img/:img", img);
 
