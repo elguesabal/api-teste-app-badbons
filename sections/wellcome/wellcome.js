@@ -109,7 +109,7 @@ import { getCredentials } from "./credentials.js";
  * @author VAMPETA
  * @brief ROTA QUE INFORMA AS CREDENCIAIS DO USUARIO
  * @method GET
- * @route /auth/credencitals
+ * @route /auth/credentials
  * @param {string} headers.authorization TOKEN DO USUARIO
  * @returns {object} 200 - RESPONDE COM AS CREDENCIAIS DO USUARIO
  * @returns 401 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
