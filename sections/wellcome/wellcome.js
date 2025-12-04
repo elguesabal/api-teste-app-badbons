@@ -115,10 +115,10 @@ import { getCredentials } from "./credentials.js";
  * @returns 401 - RESPONDE APENAS COM STATUS PARA INFORMAR QUE O TOKEN NAO E MAIS VALIDO
 */
 export function credentials(req, res) {
-	const token = req.headers["authorization"].split(" ")[1];
+	const { authorization } = req.headers;
+	if (!authorization || authorization !== "Bearer " + process.env.REFRESH_TOKEN) return (res.sendStatus(401));
 
-	if (token !== "12345") return (res.sendStatus(401));
-	res.status(200).send(getCredentials(req));
+	setTimeout(() => res.status(200).json(getCredentials(req)), 2000);
 }
 
 /**
