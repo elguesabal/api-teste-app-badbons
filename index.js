@@ -34,15 +34,4 @@ app.patch("/presence-student", presenceStudent);
 app.get("/presence-list", presenceList);
 app.get("/user/treinos", exercises);
 
-
-app.post("/test", (req, res) => {
-	// console.log("Headers: ", req.headers);
-	// console.log("Query: ", req.query);
-	// console.log("Body", req.body);
-	// console.log("\n\n\n");
-
-	res.sendStatus(204);
-});
-
-
 app.listen(process.env.PORT || 3000, () => console.log("Servidor rodando"));
